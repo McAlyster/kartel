@@ -1,0 +1,119 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="en">Help</class></h1>
+   <div class="fr">
+      <p></p>
+   </div>
+   <div class="en">
+      <p></p>
+    </div>
+</div>
+
+<div class="">
+   <h1>
+      <span class="fr">Entretien</span>
+      <span class="en">Interview</span>
+   </h1>
+   <form name="form" ng-submit="form.$valid && submit()" class="css-form" novalidate enctype="multipart/form-data">
+      <div class="fr">
+         <p>À l’issue de la présélection, 65 candidats au maximum sont invités à se présenter aux épreuves d’admission. Les épreuves de la sélection finale se déroulent au Fresnoy - Studio national.
+            <br/>Les candidats présélectionnés sont conviés à un entretien avec un jury entre le lundi 3 et le vendredi 7 juillet 2017.<br/>
+            Les candidats hors continent européen, ont la possibilité de passer l’entretien oral au Fresnoy ou par skype (Le Fresnoy ne peut être tenu pour responsable en cas de problème technique). <br/>
+         </p>
+         <p>Le ou la candidat(e) présente et commente son travail personnel et s’entretient avec les membres du jury de ses projets et motivations. Le jury est composé de représentants de disciplines artistiques différentes et du directeur du Fresnoy. L’entretien dure 40 minutes.<br/>
+            Chaque candidat est principalement jugé sur :
+         <ul>
+            <li>L’originalité, l’ambition et la qualité de sa production artistique personnelle dans une ou plusieurs disciplines, </li>
+            <li>
+               La manifestation d’un acquis et d’un savoir-faire, notamment technique,
+            </li>
+            <li>
+               L’évidence de ses intérêts multi ou transdisciplinaires,
+            </li>
+            <li>
+               Son niveau de culture générale (formation antérieure, qualités d’expression, de rédaction, etc.),
+            </li>
+            <li>
+               Son intérêt pour l’utilisation de tous les langages artistiques audiovisuels et multimédia (des supports traditionnels à ceux de la création numérique),
+            </li>
+            <li>
+               La présentation du dossier.
+            </li>
+         </ul>
+         Par ailleurs, le jury visionnera les éléments visuels de 8 minutes maximum figurant au dossier du candidat.<br/>
+         L’attention du candidat est attirée sur l’importance de ces éléments, seuls documents le présentant qui seront examinés aux deux étapes de la sélection.</p>
+      </div>
+      <div class="en">
+         <p>At the end of the pre-selection, up to 65 applicants will be invited to attend interviews at Le Fresnoy. The final selection takes place at Le Fresnoy. Shortlisted candidates will be invited for interview by the jury between Monday July 3, and Friday July 7, 2017.The applicants are mainly judged on:
+         <ul>
+            <li>The originality, reach, and quality of their personal artistic work in one or more disciplines,
+            </li>
+            <li>Their experience and mastery of skills, in particular technical ones,
+            </li>
+            <li>Their relation to multi- or trans-disciplinarity,
+            </li>
+            <li>Their level of general culture (previous training, spoken and written skills, etc.),
+            </li>
+            <li>Their effective interest toward the broader field of audiovisual and multimedia idioms (ranging from traditional forms to digital creation),
+            </li>
+            <li>The presentation of their portfolio.</li>
+         </ul>
+         Moreover, the jury will look at the visual material lasting 8 minutes maximum in the candidate’s portfolio (see artistic portfolio above). The candidate should note the importance of these documents, which are the only ones to be examined at all two stages of the selection process.
+         </p>
+      </div>
+      <div class="field">
+         <input
+            type="checkbox"
+            id="remote-interview"
+            ng-model="candidature.remote_interview"
+            name="cInterviewType"
+            class="one check"
+            />
+         <label for="remote-interview" class="check one pointer">
+         <span class="fr">
+         J'habite hors du continent Européen et souhaite passer l'entretien par Skype.
+         </span>
+         <span class="en">
+         I can go to Le Fresnoy for interviews :
+         </span>
+         </label>
+         <div class="" ng-if="!candidature.remote_interview">
+           <div class="" ng-init='candidature.remote_interview_type = ""; candidature.patch({remote_interview_type : candidature.remote_interview_type,remote_interview: candidature.remote_interview })' />
+         </div>
+         <div class="" ng-if="candidature.remote_interview">
+            <div ng-init='candidature.remote_interview_type = "skype"; candidature.patch({remote_interview_type :candidature.remote_interview_type, remote_interview: candidature.remote_interview })' />
+            <div class="">
+               <input
+                  id="remote-interview-info"
+                  type="text"
+                  ng-model="candidature.remote_interview_info"
+                  ng-change="candidature.patch({remote_interview_info : candidature.remote_interview_info})"
+                  ng-model-options='{ debounce: 1000 }'
+                  name="cInterviewInfos"
+                  placeholder = "Identifiant"
+                  required
+                  />
+               <div ng-show="form.$submitted || f
+               orm.cInterviewInfos.$touched">
+                  <span ng-show="form.cInterviewInfos.$error.required">
+                  <span class="fr">
+                  Champs requis
+                  </span>
+                  <span class="en">
+                  required
+                  </span>
+               </div>
+               <label for="remote-interview-info">
+               <span class="field-state"></span>
+               <span class="fr">Identifiant</span>
+               <span class="en">ID</span>
+               </label>
+            </div>
+         </div>
+      </div>
+   </form>
+   <div class="navigation">
+      <a class="btn prev" ui-sref="candidature.summary"><span class="fr">Retour</span><span class="en">Back</span></a>
+      <a class="btn next" ng-class="{ 'has-error': form.$invalid }"  ui-sref="candidature.finalization"><span class="fr">Continuer</span><span class="en">Continue</span></a>
+   </div>
+</div>

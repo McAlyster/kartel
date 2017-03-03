@@ -1,0 +1,25 @@
+<div class="faq">
+
+  <h1>FAQ</h1>
+  <h3 class="pointer" ng-init="faq1 = false" ng-click="faq1 = !faq1">
+    Quels données sont stockées, pendant combien de temps
+  </h3>
+  <p ng-show="faq1">à compléter CNIL</p>
+
+  <h3 class="pointer" ng-init="faq2 = false" ng-click="faq2 = !faq2">
+    Je n'arrive pas à mettre mon film en ligne
+  </h3>
+  <p ng-show="faq2">à compléter</p>
+
+  <h3 class="pointer" ng-init="faq3 = false" ng-click="faq3 = !faq3">
+    Je n'ai reçu aucun email de confirmation
+  </h3>
+  <div ng-show="faq3">
+    <span class="fr">Tous les email sont envoyés instantanément, si vous ne recevez pas d’e-mail de notre part, vérifiez vos spam, ouu écrivez nous à selection-at-lefresnoy.net</span>
+    <span class="en"></span>
+  </div>
+
+   <<div class="navigation">
+      <a class="btn prev" ui-sref="candidature.account.login"><span class="fr">Retour</span><span class="en">Back</span></a>
+   </div>
+</div>

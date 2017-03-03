@@ -1,0 +1,64 @@
+<div class="guide">
+  <div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+     <span class="close" ng-click="show_help(false)">x</span>
+     <h1>Aide</h1>
+     <div class="fr">
+        <p>Exemple d'aide</p>
+     </div>
+     <div class="en">
+        <p>Help exemple</p>
+     </div>
+  </div>
+
+  <h1>Notice d'utilisation</h1>
+
+  <p>Sur toutes les pages, une aide contextuelle est disponible en appuyant sur l'élément du menu "Aide" en haut de cette page</p>
+
+  <hr/>
+
+  <div class="data-writing" style="position:static"><span class="fr">Données enregistrés</span><span class="en">Saved data</span></div>
+  <p>
+    Vos données sont enregistrés après chaques modifications, il n'est pas nécessaire de valider quoi que ce soit.
+  </p>
+
+  <hr/>
+
+  <p>Couleurs des champs de formulaire</p>
+  <label for="family-status">
+    <span class="field-state invalid"></span>
+    <span class="fr">Données non valides</span>
+    <span class="en">Invalid Data</span>
+  </label>
+  <label for="family-status">
+    <span class="field-state valid"></span>
+    <span class="fr">Données validées</span>
+    <span class="en">Valid Data</span>
+  </label>
+  <label for="family-status">
+    <span class="field-state required"></span>
+    <span class="fr">Donnée requises</span>
+    <span class="en">Required data</span>
+  </label>
+
+  <hr/>
+
+  <p>Le symbole suivant vous invite à téléverser un fichier</p>
+  <div class="media-upload" ><span class="upload-file" /></div>
+  <p>Les fichiers images acceptés sont du type JPG, PNG, GIF<br/>
+    Les fichiers documents acceptés sont du type PDF<br/>
+    Les fichiers vidéo acceptés sont de tous types<br/>
+  </p>
+
+  <hr/>
+
+
+
+
+
+
+
+   <div class="navigation">
+      <a class="btn prev" ui-sref="candidature.account.login"><span class="fr">Retour</span><span class="en">Back</span></a>
+   </div>
+
+</div>

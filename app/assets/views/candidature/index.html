@@ -1,0 +1,38 @@
+<div class="student-app container-fluid">
+    <div class="row">
+      <div class="visible-md visible-lg col-md-1 sidebar ">
+          <a href="http://www.lefresnoy.net" target="_blank">
+            <img src="images/candidature/fresnoy-bandeau.jpg"  />
+          </a>
+      </div>
+      <div class="col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-5 col-lg-4">
+        <div class="content">
+          <div class="upload" ng-if='upload_percentage<99'><span class="unit">{{upload_percentage}}</span><img src='http://mupit.icm.jhu.edu/MuPIT_Interactive/images/load.gif' /></div>
+
+          <div class="data-writing" ng-show="writingData"><span class="fr">Données enregistrés</span><span class="en">Saved data</span></div>
+
+          <ng-include src="'views/candidature/partials/navigation-header.html'"></ng-include>
+          <div ui-view="application_content_view"></div>
+        </div>
+        <div class="row">
+          <ng-include  src="'views/candidature/partials/navigation-breadcrumb.html'"></ng-include>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-7 right-screen">
+        <div class="">
+          <div class="bg" style="background-image:url({{candidature_config.path}}{{candidature_config.screen[step.current].image}});
+          background-position-x:{{candidature_config.screen[step.current].position.x}}">
+          </div>
+          <div class="step-infos visible-md visible-lg">
+                <div class="current">{{step.current}}</div>
+                <div class="total">/ {{step.total}}</div>
+                <div class="title">{{step.title}}</div>
+          </div>
+          <div class="copyright">
+            <span ng-bind='candidature_config.screen[step.current].copyright' />
+          </span>
+        </div>
+
+      </div>
+    </div>
+</div>

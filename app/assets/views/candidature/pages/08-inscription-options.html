@@ -1,0 +1,33 @@
+<div class="option">
+  <h1>
+    <span class="fr">Inscription</span>
+    <span class="en">Inscription</span>
+  </h1>
+  <div class="" >
+  <p class="fr">
+    Cette année deux choix s'offrent à vous pour postuler :
+  </p>
+  <p class="en">
+    This year two choices are available to you to apply:
+  </p>
+  <hr/>
+  <span ng-if="!user.profile.birthdate">
+    <a class="btn green" ui-sref="candidature.administrative-informations">
+      <span class="fr">En ligne</span>
+      <span class="en">Online</span>
+    </a>
+  </span>
+  <span ng-if="user.profile.birthdate">
+      <a class="btn green" ui-sref="candidature.summary">
+        <span class="fr">En ligne<br/><span style='text-transform:none'>(Continuer l'inscription)</span></span>
+        <span class="en">Resume application</span>
+      </a>
+  </span>
+  <hr/>
+    <a class="btn grey" ui-sref="candidature.mail" >
+      <span class="fr">Par courrier</span>
+        <span class="en">By mail</span>
+    </a>
+  </div>
+
+</div>

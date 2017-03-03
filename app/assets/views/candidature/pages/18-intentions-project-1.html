@@ -1,0 +1,149 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="en">Help</class></h1>
+   <div class="fr">
+      <p>Tous les textes peuvent être accompagnés de visuels.
+      <ul>
+         <li>Résumé du parcours et/ou des études (10 lignes).<br/>Ce document décrira le parcours personnel qui a conduit à la candidature.            </li>
+         <li>Lettre de motivation/note d’intention (3 pages).            Dans ce document, le candidat expose ses motivations et explicite en quoi sa démarche artistique peut se développer au Fresnoy, le candidat sera jugé sur la qualité d’écriture et la pertinence de son argumentation.            </li>
+         <li>Artistes et œuvres de référence (20 lignes). Ce document précise les artistes et œuvres de référence du candidat dans les domaines du cinéma, des arts plastiques, de la littérature, du spectacle vivant, etc… dans le champ particulier à chacune des deux années.            </li>
+         <li>Projets envisagés pour les deux années au Fresnoy (1 page par projet). Plutôt que des projets précis, ce document doit indiquer le type d’œuvre que l’artiste envisage de réaliser au Fresnoy dans le champ particulier à chacune des deux années et dans une démarche transdisciplinaire : film, vidéo, photographie, installations interactives, sonores ou programmées, spectacle vivant...            </li>
+         <li>Texte relatif au contenu des éléments visuels (10 lignes).</li>
+      </ul>
+      </p>
+   </div>
+   <div class="en">
+      <p>All the texts may be backed up with images.
+      <ul>
+         <li>Résumé of candidate’s background and/or studies (10 lines). This document explains how the candidate’s background led him/her to apply.</li>
+         <li>Motivation letter/note of intention (3 pages). In this document, the candidate explains what his motivations are and explains how his artistic practice may develop at Le Fresnoy. The candidate will be judged on the quality of writing and the relevance of his/her arguments.</li>
+         <li>Artists and works of reference (20 lines). <br/>This document indicates the artists and works of reference of the candidate in the area of film, art, literature, live arts, etc. in the particular field of each of the two years.</li>
+         <li>Projects envisaged for the two years at Le Fresnoy (1 page per project). Rather than very defined projects, this document should indicate the type of work that the artist envisages making at Le Fresnoy in the particular field of each of the two years and in a transdisciplinary mode: film, video, photography, sound, interactive or programmed installations, live arts, etc. </li>
+         <li>A text linked to the content of the visual material (10 lines).</li>
+      </ul>
+      A first year of work on traditional media, electronic or not, of cinema, photography, video art, and visual arts. <br/>A second year of work and research on digital media.          </p>
+   </div>
+</div>
+
+
+<div class="">
+   <h1>
+      <span class="fr">Intentions</span>
+      <span class="en">Intentions</span>
+   </h1>
+   <form name="form" ng-submit="form.$valid && submit()" class="css-form" novalidate enctype="multipart/form-data">
+   <p>Merci de lire impérativement les <a ng-click="show_help(true)">informations  </a> avant de compléter cette étape.</p>
+   <h3>Projets envisagés durant le cursus du Fresnoy</h3>
+   <p><strong>1<span class="exposant">re</span> année </strong>Travail sur les supports traditionnels,
+      argentiques et électroniques, du cinéma, de la
+      photographie, de la vidéo et des arts visuels.<br>
+      <strong>2<span class="exposant">e</span> année</strong> Travail sur les supports de la création
+      numérique et sur les écritures digitales.
+   </p>
+   <h3>Première année</h3>
+   <div class="field">
+      <input name="cProject1" ng-model="candidature.considered_project_1" hidden required />
+      <div id="considered-project-1"
+         ng-model="candidature.considered_project_1"
+         name="cProject1"
+         ngf-select="upload(candidature.considered_project_1, candidature, 'considered_project_1') " ngf-capture="'camera'"
+         accept="application/pdf"
+         ngf-accept="'application/pdf'"
+         ngf-pattern="'application/pdf'"
+         ngf-model-invalid="invalidFileProject1"
+         required
+         class="media-upload"
+         ng-show='!candidature.considered_project_1'
+         >
+         <span class="upload-file" />
+      </div>
+      <div class="item" ng-if="candidature.considered_project_1" ng-init='RC_prj1=false'>
+         <a class="link" target='_blank' href="{{candidature.considered_project_1}}"><img  /></a>
+         <span class="name">{{candidature.considered_project_1.split('.').pop()}}</span>
+         <span class="trash" ng-click="RC_prj1=true" />
+         <div class="delete-pane" ng-show="RC_prj1">
+            <span class="trash" ng-click="candidature.considered_project_1=''; RC_prj1=false" />
+            <span class="name"><span class="fr">Supprimer</span><span class="en">Delete</span></span>
+            <span class="cancel" ng-click="RC_prj1=false"></span>
+         </div>
+      </div>
+      <div ng-show="invalidFileProject1.$errorMessages" ng-messages="invalidFileProject1.$errorMessages" class="help-block error">
+         <div ng-message="pattern">
+            <span class="fr">Format accepté : pdf</span>
+            <span class="en">Accepted format : pdf</span>
+         </div>
+      </div>
+      <div ng-show="form.cProject1.$touched && form.cProject1.$invalid" ng-messages="form.cProject1.$error" class="help-block error">
+         <div ng-message="required">
+            <span class="fr">Obligatoire</span>
+            <span class="en">Required</span>
+         </div>
+         <div ng-message="considered_project_1">
+            <span class="fr">Valeur éronnée</span>
+            <span class="en">Value Error</span>
+         </div>
+      </div>
+      <label class="topborder" for="considered-project-1">
+      <span class="field-state required"></span>
+      <span class="fr">Projet envisagé <br/>pour la première année (1 page)</span>
+      <span class="en"> </span>
+      </label>
+   </div>
+
+
+
+   <div class="field">
+
+     <div id="considered-referencies-project-1"
+        ng-model="candidature.artistic_referencies_project_1"
+        name="cARP1"
+        ngf-select="upload(candidature.artistic_referencies_project_1, candidature, 'artistic_referencies_project_1') " ngf-capture="'camera'"
+        accept="application/pdf"
+        ngf-accept="'application/pdf'"
+        ngf-pattern="'application/pdf'"
+        ngf-model-invalid="invalidFileRefProject1"
+        required
+        class="media-upload"
+        ng-show='!candidature.artistic_referencies_project_1'
+        >
+        <span class="upload-file" />
+     </div>
+     <input name="cRefProject1" ng-model="candidature.artistic_referencies_project_1" hidden required />
+     <div class="item" ng-if="candidature.artistic_referencies_project_1" ng-init='RC_ref_prj1=false'>
+        <a class="link" target='_blank' href="{{candidature.artistic_referencies_project_1}}"><img  /></a>
+        <span class="name">{{candidature.artistic_referencies_project_1.split('.').pop()}}</span>
+        <span class="trash" ng-click="RC_ref_prj1=true" />
+        <div class="delete-pane" ng-show="RC_ref_prj1">
+           <span class="trash" ng-click="candidature.artistic_referencies_project_1=''; RC_ref_prj1=false" />
+           <span class="name"><span class="fr">Supprimer</span><span class="en">Delete</span></span>
+           <span class="cancel" ng-click="RC_ref_prj1=false"></span>
+        </div>
+     </div>
+     <div ng-show="invalidFileRefProject1.$errorMessages" ng-messages="invalidFileRefProject1.$errorMessages" class="help-block error">
+        <div ng-message="pattern">
+           <span class="fr">Format accepté : pdf</span>
+           <span class="en">Accepted format : pdf</span>
+        </div>
+     </div>
+
+      <div ng-show="form.cRefProject1.$touched && form.cRefProject1.$invalid" ng-messages="form.cRefProject1.$error" class="help-block error">
+         <div ng-message="required">
+            <span class="fr">Obligatoire</span>
+            <span class="en">required</span>
+         </div>
+         <div ng-message="maxlength">
+            <span class="fr">maxlength</span>
+            <span class="en">maxlength</span>
+         </div>
+      </div>
+      <label class="topborder" for="artistic-referencies-project-1">
+            <span class="field-state required"></span>
+            <span class="fr">Références artistiques (20 lignes, format pdf) </span>
+            <span class="en">Artistic references for the first year's project 20 lines, pdf</span>
+      </label>
+   </div>
+   <div class="navigation">
+      <a class="btn prev" ui-sref="candidature.motivations"><span class="fr">Retour</span><span class="en">Back</span></a>
+      <a class="btn next" ui-sref="candidature.intentions-project-2"><span class="fr">Continuer</span><span class="en">Continue</span></a>
+   </div>
+</div>

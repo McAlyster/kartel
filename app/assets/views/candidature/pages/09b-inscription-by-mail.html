@@ -1,0 +1,59 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="en">Help</class></h1>
+   <div class="fr">
+      <p></p>
+   </div>
+   <div class="en">
+      <p></p>
+   </div>
+</div>
+
+<div class="bymail">
+  <h1>
+    <span class="fr">Inscription</span>
+    <span class="en">Inscription</span>
+  </h1>
+   <p>
+      <span class="fr">Voici la référence à indiquer sur la fiche d'inscription administrative :</span>
+      <span class="en">Voici la référence à indiquer sur la fiche d'inscription administrative :</span>
+   <div style="text-align:center">
+      <strong>
+      {{ candidature.current_year_application_count}}
+      </strong>
+   </div>
+   </p>
+   <a class="btn green" target="_blank" href="http://www.lefresnoy.net/sites/prod/files/2017/downloads/basic-page/inscription//procedure-admission-2017.pdf" >
+
+        <span class="fr">Télécharger la procédure</span>
+        <span class="en">Télécharger la procédure</span>
+
+   </a>
+   <br/>
+   <p>
+      <span class="fr">Merci de suivre les instructions de cette procédure et d'adresser votre dossier complet à :</span>
+      <span class="en">Merci de suivre les instructions de cette procédure et d'adresser votre dossier complet à :</span>
+   </p>
+   <p>
+      Pédagogie - Concours 2017<br/>
+      Le Fresnoy - Studio national <br/>des arts contemporains<br/>
+      22 rue du Fresnoy <br/>
+      BP 80179 <br/>
+      59202 Tourcoing Cedex <br/>
+      France
+   </p>
+   <p>
+      <strong>Avant le vendredi 28 avril 2017 minuit</strong><br/>(le cachet le la poste faisant foi).
+      <br/>
+      Un email de confirmation vous sera adressé dès réception de votre dossier.
+   </p>
+   <p>
+      Nous vous remercions pour votre candidature et vous souhaitons bonne chance !
+   </p>
+
+
+
+  <div class="navigation">
+     <a class="btn prev" ui-sref="candidature.options"><span class="fr">Retour</span><span class="en">Back</span></a>
+  </div>
+</div>

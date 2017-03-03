@@ -1,0 +1,177 @@
+<h1>
+    {{ user.first_name }}  {{ user.last_name }}
+     <span ng-if="artist.nickname">"{{ artist.nickname }}"</span>
+
+  </h1>
+<h2>
+  <small>
+    Inscription n° {{ candidature.current_year_application_count }}
+  </small>
+</h2>
+
+<div class="info col-sm-9">
+
+  <div class="person">
+
+    <h2><i class="glyphicon glyphicon-question-sign"></i>&nbsp;A propos</h2>
+
+    <div ng-if="user.profile.birthdate || user.profile.birthplace">
+      Né(e) <span ng-if="user.profile.birthdate">le {{ user.profile.birthdate }} ({{user.profile.birthdate | ageFilter}} ans)</span>
+      <span ng-if="user.profile.birthplace">à {{ user.profile.birthplace }} ({{ user.profile.birthplace_country }})</span>.
+    </div>
+    <span ng-if="user.profile.gender">Genre :  {{ user.profile.gender }}</span>
+    <div ng-if="user.profile.cursus">
+      <h3>Cursus</h3>
+      <div ng-bind-html="user.profile.cursus|markdown"></div>
+    </div>
+
+    <div class="links">
+      <ul>
+        <li class="phone">
+          <i class="glyphicon glyphicon-earphone "></i>&nbsp;<a href="tel:{{ user.profile.residence_phone }}" class="" target="_blank">{{user.profile.residence_phone }} / {{ user.profile.homeland_phone }}</a>
+        </li>
+        <li class="websites" ng-if="artist.websites.length">
+          <i class="glyphicon glyphicon-link"></i>&nbsp;Web :
+          <ul>
+            <li class="website" ng-repeat="website in artist.websites"><a href="{{ website.url }}" target="_blank">{{ website.title_fr }}</a></li>
+          </ul>
+        </li>
+        <li class="socialnetworks">
+          <ul>
+            <li class="twitter" ng-if="artist.twitter_account"><i class="glyphicon glyphicon-comment"></i>&nbsp;<a href="{{ artist.twitter_account }}" target="_blank">Twitter</a></li>
+            <li class="facebook" ng-if="artist.facebook_profile"><i class="glyphicon glyphicon-comment"></i>&nbsp;<a href="{{ artist.facebook_profile }}" target="_blank">Facebook</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+
+      <tabset class="api-field">
+        <!-- Desciption  tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="text">
+              <h3>Biographie</h3>
+          </li>
+          <li role="presentation" class="active">
+            <a data-target ="#bio-fr" aria-controls="description-fr" role="tab" data-toggle="tab">
+              <flag-icon country="fr"></flag-icon>
+            </a>
+          </li>
+          <li role="presentation">
+            <a data-target ="#bio-en" aria-controls="description-en" role="tab" data-toggle="tab">
+              <flag-icon country="uk"></flag-icon>
+            </a>
+          </li>
+          <li ng-if="student.bio_short_fr" role="presentation">
+            <a data-target ="#bio-short-fr" aria-controls="bio-short-fr" role="tab" data-toggle="tab">
+              Courte <flag-icon country="fr"></flag-icon>
+            </a>
+          </li>
+          <li ng-if="student.bio_short_en" role="presentation">
+            <a data-target ="#bio-short-en" aria-controls="bio-short-en" role="tab" data-toggle="tab">
+              Courte <flag-icon country="uk"></flag-icon>
+            </a>
+          </li>
+        </ul>
+          <!-- Desciption  content -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="bio-fr">
+            <div ng-bind-html="artist.bio_fr|markdown"></div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="bio-en">
+            <div ng-bind-html="artist.bio_en|markdown"></div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="bio-short-fr">
+            <div ng-bind-html="artist.bio_short_fr|markdown"></div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="bio-short-en">
+            <div ng-bind-html="artist.bio_short_en|markdown"></div>
+          </div>
+        </div>
+      </tabset>
+
+
+  </div>
+
+
+</div>
+
+
+<div class="photo col-sm-3">
+  <div class="thumbnail" ng-if="user.profile.photo" >
+    <img src="{{user.profile.photo}}" height="300px" />
+  </div>
+</div>
+
+<div class="info col-sm-12">
+  <h2><i class="glyphicon glyphicon-flash"></i>Medias</h2>
+
+
+
+    <div ng-if="candidature.administrative_galleries.length">
+      <h4><i class="glyphicon glyphicon-folder-open"></i> Administrative gallery</h4>
+      <div ng-repeat="gallery in candidature.administrative_galleries">
+        <h5>{{ gallery.label }} ({{ gallery.description }})</h5>
+
+        <div class="col-sm-2" ng-repeat="media in gallery.media">
+          <div class="thumbnail">
+            <a href="javascript:void(0);" ng-click="lightbox(gallery.media, $index)">
+              <h6>{{ media.position }}</h6>
+              {{ media.label }}
+              {{ media.description }}
+            </a>
+            <a href="javascript:void(0);" ng-click="$parent.openLightboxModal($index)">
+              <fresnoy-thumbnail ng-if="media.picture | isFresnoyUrl" thurl="media.picture" thwidth="300" thheight="200" thformat="jpg"></fresnoy-thumbnail>
+              <img ng-if="!(media.picture | isFresnoyUrl)" src="{{ media.picture }}" />
+            </a>
+              <i ng-if="media.medium_url" class="glyphicon glyphicon-film"></i>
+
+              <a class="no-print" ng-if="media.medium_url | isFresnoyUrl" target="_blank" href="http://media.lefresnoy.net/?url=http://api.lefresnoy.net/{{ media.picture }}&op=noop" download="Image"><i class="glyphicon glyphicon-link"></i></a>
+              <a class="no-print" ng-if="!(media.picture | isFresnoyUrl)" target="_blank" href="{{ media.picture }}" download="Image"><i class="glyphicon glyphicon-link"></i></a>
+          </div>
+        </div>
+
+
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+    <div ng-if="candidature.artwork_galleries.length">
+      <h4><i class="glyphicon glyphicon-eye-open"></i>Artworks gallery</h4>
+      <div ng-repeat="gallery in candidature.artwork_galleries">
+        <h3>{{ gallery.label }}</h3>
+        <p>
+          {{ gallery.description }}
+        </p>
+        <div class="col-sm-2" ng-repeat="media in gallery.media">
+          <div class="thumbnail">
+            <a href="javascript:void(0);" ng-click="lightbox(gallery.media, $index)">
+              <h6></h6>
+              {{ media.label }}
+              {{ media.description }}
+            </a>
+            <a href="javascript:void(0);" ng-click="$parent.openLightboxModal($index)">
+              <fresnoy-thumbnail ng-if="media.picture | isFresnoyUrl" thurl="media.picture" thwidth="300" thheight="200" thformat="jpg"></fresnoy-thumbnail>
+              <img ng-if="!(media.picture | isFresnoyUrl)" src="{{ media.picture }}" />
+            </a>
+              <i ng-if="media.medium_url" class="glyphicon glyphicon-film"></i>
+
+              <a class="no-print" ng-if="media.medium_url | isFresnoyUrl" target="_blank" href="http://media.lefresnoy.net/?url=http://api.lefresnoy.net/{{ media.picture }}&op=noop" download="Image"><i class="glyphicon glyphicon-link"></i></a>
+              <a class="no-print" ng-if="!(media.picture | isFresnoyUrl)" target="_blank" href="{{ media.picture }}" download="Image"><i class="glyphicon glyphicon-link"></i></a>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+</div>

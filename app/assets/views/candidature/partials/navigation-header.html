@@ -1,0 +1,13 @@
+<div class="navigation header">
+
+  <ul class="list-inline small">
+    <li class="help"><a class="pointer" ui-sref="candidature.user-guide"><span class='fr'>Guide</span><span class='en'>User guide</span></a></li> |
+    <li class="help"><a class="pointer" ui-sref="candidature.faq">FAQ</a></li> |
+    <li class="help"><a href="https://goo.gl/forms/FEBMd0Idb5UqSPix2" target="_blank">Bug ?</a></li> |
+    <li class="help"><a class="pointer"  ng-click="setLang('fr')" >FR</a></li> |
+    <li class="help"><a class="pointer"  ng-click="setLang('en')" >EN</a></li> |
+    <li class="help"><a class="pointer"  ng-click="show_help(true)">Aide</a></li>  |
+    <li ng-if="isAuthenticated"><a class="pointer" ng-click="logout()">Déconnexion</a></li>
+  </ul>
+
+</div>

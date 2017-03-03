@@ -1,0 +1,81 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="en">Help</class></h1>
+   <div class="fr">
+     <p>
+        Lettre de motivation/note d’intention (3 pages).
+        Dans ce document, le candidat expose ses
+        motivations et explicite en quoi sa démarche
+        artistique peut se développer au Fresnoy,
+     </p>
+   </div>
+   <div class="en">
+      <p></p>
+   </div>
+</div>
+
+
+<div class="">
+   <h1>
+      <span class="fr">Motivations</span>
+      <span class="en">Motivations</span>
+   </h1>
+   <p>
+      Lettre de motivation / note d’intention (3 pages) au format PDF.
+   </p>
+   <form name="form1" ng-submit="form.$valid && submit()" class="css-form" novalidate enctype="multipart/form-data">
+      <div class="field">
+         <input name="cJustification" ng-model="candidature.justification_letter" hidden required />
+         <div id="justification-letter"
+            ng-show="!candidature.justification_letter"
+            class="media-upload"
+            ng-model="candidature.justification_letter"
+            name="cJustification"
+            ngf-select="upload(candidature.justification_letter, candidature, 'justification_letter') "
+            ngf-capture="'camera'"
+            accept="application/pdf"
+            ngf-accept="'application/pdf'"
+            ngf-pattern="'application/pdf'"
+            ngf-model-invalid="invalidJustificationLetter"
+            required
+            >
+            <span class="upload-file" />
+         </div>
+         <div class="item" ng-if="candidature.justification_letter" ng-init='RC_letter=false'>
+            <a class="link" target='_blank' href="{{candidature.justification_letter}}"><img  /></a>
+            <span class="name">{{candidature.justification_letter.split('.').pop()}}</span>
+            <span class="trash" ng-click="RC_letter=true" />
+            <div class="delete-pane" ng-show="RC_letter">
+               <span class="trash" ng-click="candidature.justification_letter=''; RC_letter=false" />
+               <span class="name"><span class="fr">Supprimer</span><span class="en">Delete</span></span>
+               <span class="cancel" ng-click="RC_letter=false"></span>
+            </div>
+         </div>
+         <div ng-show="invalidJustificationLetter.$errorMessages" ng-messages="invalidJustificationLetter.$errorMessages" class="help-block error">
+            <div ng-message="pattern">
+               <span class="fr">Ce n'est pas un fichier pdf</span>
+               <span class="en">Only Pdf accepted</span>
+            </div>
+         </div>
+         <div ng-show="form.cJustification.$touched && form.cJustification.$invalid" ng-messages="form.cJustification.$error" class="help-block error">
+            <div ng-message="required">
+               <span class="fr">Obligatoire</span>
+               <span class="en">Required</span>
+            </div>
+            <div ng-message="justification_letter">
+               <span class="fr">Valeur éronnée</span>
+               <span class="en">Value Error</span>
+            </div>
+         </div>
+         <label class="topborder" for="id-justification">
+         <span class="field-state required"></span>
+         <span class="fr">Lettre de motivation / note intention</span>
+         <span class="en">Lettre de motivation / note intention</span>
+         </label>
+      </div>
+   </form>
+   <div class="navigation">
+      <a class="btn prev" ui-sref="candidature.previous-applications"><span class="fr">Retour</span><span class="en">Back</span></a>
+      <a class="btn next" ui-sref="candidature.intentions-project-1"><span class="fr">Continuer</span><span class="en">Continue</span></a>
+   </div>
+</div>

@@ -223,7 +223,7 @@
 
     <h3><i class="glyphicon glyphicon-th-large"></i>&nbsp;Partenaires</h3>
     <ul>
-      <li ng-repeat="partner in artwork.partners">{{ partner.organization.name }} ({{ partner.task.label }})</li>
+      <li ng-repeat="partner in artwork.partners track by $index">{{ partner.organization.name }} ({{ partner.task.label }})</li>
     </ul>
 
   </div>

@@ -21,12 +21,12 @@
     "tests"
   ],
   "dependencies": {
-    "slug" : "0.9.1",
-    "lodash":"~4.6",
+    "slug": "0.9.1",
+    "lodash": "~4.6",
     "underscore": "~1.8.0",
     "jquery": "~2.1.1",
-    "angular": "~1.5.0",
-    "angular-animate": "~1.5.0",
+    "angular": "~1.5.5",
+    "angular-animate": "~1.5.9",
     "angular-cookies": "~1.5.0",
     "restangular": "~1.5.0",
     "angular-ui-router": "~1.0.0",
@@ -37,20 +37,30 @@
     "angular-ui-grid": "~3.1.0",
     "angular-markdown-filter": "~1.4.0",
     "angular-sanitize": "~1.5.0",
-    "angular-bootstrap-lightbox": "~0.11.0"
+    "angular-bootstrap-lightbox": "~0.11.0",
+    "iso-3166-country-codes-angular": "~1.1.1",
+    "ng-file-upload": "~12.2.12",
+    "ng-places-autocomplete": "~1.2.2",
+    "langmap": "~0.0.10",
+    "angular-jwt": "~0.1.8",
+    "auth0-lock": "~10.6.1",
+    "auth0-angular": "~4.2.7",
+    "angularjs-datepicker": "~2.1.9",
+    "angular-messages": "~1.6.1",
+    "flag-icon-css": "~2.8.0"
   },
   "overrides": {
-  	"lodash":{
-  		"main":"dist/lodash.js"
-  	},
-  	"bootstrap" : {
-  	        "main": [
-  	           "less/bootstrap.less",
-  	           "dist/css/bootstrap.css",
-  	           "dist/js/bootstrap.js",
-  	           "dist/js/tab.js"
-  	         ]
-  	   },
+    "lodash": {
+      "main": "dist/lodash.js"
+    },
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js",
+        "dist/js/tab.js"
+      ]
+    },
     "jsonselect": {
       "main": "src/jsonselect.js"
     },
@@ -64,8 +74,5 @@
         "dist/MarkerCluster.Default.css"
       ]
     }
-  },
-  "resolutions": {
-    "angular": "~1.5.0"
   }
 }

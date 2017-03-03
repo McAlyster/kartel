@@ -264,6 +264,724 @@ div.api-field {
 }
 
 
+// Candidature
+body.fr {
+  .fr{
+    display: inline-block;
+  }
+  .en{
+    display: none;
+  }
+}
+body.en {
+  .en{
+    display: inline-block;
+  }
+  .fr{
+    display: none;
+  }
+}
+
+.student-app{
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    &.container-fluid {
+      /* BUG */
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    .exposant{
+      font-size: .8em;
+      vertical-align: top;
+    }
+    h1{
+      margin-top: 0px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      font-size: 26px;
+      &:after{
+          content:"";
+          margin: 5px 0px;
+          height:7px;
+          width: 80px;
+          background: black;
+          display: block;
+      }
+    }
+    h2{
+      font-size: 20px;
+    }
+    .upload{
+      position: absolute;
+      left:0;
+      top:0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.8);
+      z-index: 5;
+      text-align: center;
+      .unit{
+        font-size: 2em;
+        display: block;
+        position: absolute;
+        width:100%;
+        text-align: center;
+        top: 50%;
+        &:after{
+          content: " / 100";
+        }
+      }
+      img{
+        position: absolute;
+        display: block;
+        height: 20%;
+        top: 25%;
+        margin-left: -13%;
+        left: 50%;
+      }
+    }
+    .content {
+      max-width: 330px;
+      width:100%;
+      margin-top: 50px;
+      z-index:2;
+      padding: 40px;
+      box-shadow: 0px 0px 5px black;
+      position: relative;
+      background-color: rgba(255,255,255,0.8);
+      p, li{
+        line-height: 1.2em;
+      }
+    }
+    .pointer{
+      cursor: pointer;
+    }
+    .btn{
+        background: black;
+        padding: 5px 10px;
+        color:white;
+        border-radius: 0px;
+        &.green {
+          background-color: #B8E986;
+        }
+        &.block{
+          display: block;
+        }
+        &.btn-inv{
+          background: none;
+          border: 1px solid black;
+          color:black;
+        }
+        &.photo-remove{
+          margin: 10px 0px;
+        }
+    }
+    .help-pane{
+      position: absolute;
+      top: -50px;
+      left: -5px;
+      width: 105%;
+      padding: 30px;
+      background: #d8d8d8;
+      min-height: 100vh;
+      height: 100%;
+      z-index: 100;
+      .close{
+        background: url(../images/candidature/icons/cancel.svg) no-repeat center center;
+        width: 20%;
+        height: 20px;
+        display: inline-block;
+        opacity: 1;
+        overflow: hidden;
+        text-indent: -100px;
+        &:hover{
+          opacity: .8;
+        }
+      }
+
+    }
+    .field{
+      position: relative;
+    }
+    input, select, textarea{
+      width:100%;
+      margin: 5px 0px;
+      border: 0px;
+      border-bottom: 3px solid black;
+      margin:0px;
+      margin-top: 20px;
+      padding-bottom: 5px;
+      text-indent: 4px;
+      font-size: 18px;
+      color:#4a4a4a;
+      &.no-border{
+        border-bottom: 0px solid black;
+      }
+      &:focus{
+        outline:none;
+        background-color: rgba(0,0,0,.05)
+      }
+      &.ng-invalid.ng-touched{
+        background-color:none;
+        ~label .field-state{
+          background: #dc4154;
+        }
+      }
+      &.ng-valid{
+        ~label .field-state{
+          background: #B8E986;
+        }
+      }
+      &.ng-invalid-required{
+        ~label .field-state{
+          background: orange;
+        }
+      }
+
+      &.date{
+        background: transparent url(../images/candidature/icons/calendar.svg) no-repeat right;
+        background-size: 20px;
+      }
+      &[type='checkbox'],&[type='radio'] {
+        /*
+         width: 30px;
+         height: 30px;
+         */
+         width: auto;
+         display: inline-block;
+        &.one{
+          margin: 20px;
+          ~ label {
+            vertical-align: top;
+            text-align: left;
+            display:inline-block;
+            &.big{
+            }
+          }
+        }
+        &.check{
+          visibility: hidden;
+          position: absolute;
+          + label{
+            font-size: 12px;
+            padding-left: 50px;
+            text-transform: none;
+            font-weight: bold;
+            color: black;
+            position: relative;
+            &:before{
+              content: " ";
+              display: inline-block;
+              position: absolute;
+              top:50%;
+              left: 0;
+              margin-top: -20px;
+              width: 40px;
+              height: 40px;
+              background: transparent url(../images/candidature/icons/check_false.svg) 0 0px no-repeat;
+            }
+          }
+          &:checked + label:before {
+              background: transparent url(../images/candidature/icons/check_true.svg) 0 0px no-repeat;
+          }
+        }
+      }
+      &.phone_code{
+          background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='16px' width='85px'><text x='0' y='15' fill='gray' font-size='12' font-family='arial'>+</text></svg>");
+          background-repeat: no-repeat;
+          background-position: 2px 5px;
+          padding-left: 12px;
+      }
+    }
+    .help-block{
+      text-align: center;
+      margin: 0px;
+      &.error{
+        color: black;
+        font-weight: bold;
+        text-decoration: none;
+        text-transform: none;
+        background: #dc4154; /* rgba(208,27,1,.75); */
+        padding: 5px;
+        margin: 5px 0px;
+      }
+    }
+    select{
+      background: url(../images/candidature/icons/arrow_list.svg) no-repeat left;
+      background-size: 20px;
+      text-indent: 15%;
+      text-align: center;
+      -webkit-appearance: none;
+      appearance:none;
+      -moz-appearance:none; /* Firefox */
+      -webkit-appearance:none;
+    }
+    textarea{
+      height: 50px;
+      font-size: 16px;
+      &:focus{
+        height: auto;
+      }
+    }
+    label.topborder{
+      border-top: 3px solid black;
+    }
+    label {
+
+      text-align: right;
+      font-weight: normal;
+      text-transform: uppercase;
+      font-size: .8em;
+      color:grey;
+      display: inline-block;
+      width: 100%;
+      .field-state{
+        width:7px;
+        height: 7px;
+        background: black;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 5px;
+        &.invalid{
+          background: #dc4154;
+        }
+        &.valid{
+          background: #B8E986;
+        }
+        &.required{
+          background: orange;
+        }
+      }
+    }
+    .summary {
+      h2{
+        margin: 0px;
+        font-size: 1.1em;
+      }
+      h3{
+        margin: 0px;
+        font-size: 1.0em;
+      }
+      hr{
+        margin: 0px 0px 5px 0px;
+        height: 1px;
+      }
+      a{
+        &:hover{
+          text-decoration: none;
+        }
+        label{
+          cursor: pointer;
+        }
+      }
+      input{
+        width:70%;
+        display: inline-block;
+        margin: 5px 0px;
+        font-size: 0.9em;
+        border: 0px;
+        margin: 0px;
+        &.hidden{
+          opacity: 0;
+          width: 0px;
+          display: inline-block !important;
+        }
+      }
+      label{
+        text-align: left;
+        font-weight: normal;
+        text-transform: uppercase;
+        font-size: 0.8em;
+        margin: 0px;
+        color:grey;
+        display: inline-block;
+        width: auto;
+      }
+
+      .edit{
+        font-size: 0.8em;
+        color: black;
+      }
+      .isvalid:before{
+        display: inline-block;
+        width: 10px;
+        margin-top: 0px;
+        font-weight: bold;
+        position: absolute;
+        left:-0px;
+      }
+
+      input.ng-invalid + .isvalid:before {
+        content: "x";
+        color: #dc4154;
+      }
+      input.ng-valid + .isvalid:before {
+        content: "√";
+        color: #B8E986;
+      }
+    }
+    .navigation{
+      margin: 30px 0px;
+      position: relative;
+
+      .prev:before{
+        content:"◄";
+        margin-right: 5px;
+        font-size: 0.5em;
+        vertical-align: middle;
+      }
+
+      .next{
+          position: absolute;
+          right: 0px;
+          &:after{
+            content:"►";
+            margin-left: 5px;
+            font-size: 0.5em;
+            vertical-align: middle;
+          }
+      }
+      &.footer {
+        margin: 0px 0px;
+        position: absolute;
+        bottom:-10px;
+        right: 5px;
+      }
+      &.header{
+        position: absolute;
+        margin: 0px 0px;
+        top:-20px;
+        right: 0px;
+        height: auto;
+        a{
+          font-size: 0.8em;
+          color: #9B9B9B;
+        }
+      }
+      &.breadcrumb{
+        position: absolute;
+        background: none;
+        z-index: 1;
+        margin: 20px 0px;
+        width: 350px;
+        text-align: center;
+        a{
+          color: grey;
+        }
+        .square{
+          width: 9px;
+          height: 9px;
+          display: block;
+          background: grey;
+        }
+        li.current .square{
+          background: black;
+        }
+        .rollover{
+          display: none;
+          position: absolute;
+          margin-top: -35px;
+          margin-left: -100px;
+          text-align: center;
+          pointer-events: none;
+          width: 200px;
+          font-size: 1.2em;
+
+        }
+        li{
+          margin: 0% 7%;
+          &:hover {
+            .square{
+              background: black;
+            }
+            .rollover{
+              display: block;
+            }
+          }
+        }
+      }
+    }
+    .data-writing{
+        position: absolute;
+        right: 130px;
+        top:78px;
+        font-size: 0.8em;
+        box-shadow: 2px 1px 2px rgba(0,0,0,0.3);
+        background: #B8E986;
+        color: black;;
+        border-radius: 10px;
+        padding: 1px 10px;
+
+        -webkit-transition: 0.1s linear all;
+      	transition: 0.1s linear all;
+      	opacity: 1;
+        &.ng-hide{
+          opacity:0;
+        }
+        &.ng-hide{
+          display: inline-block !important;
+        }
+    }
+    .modal {
+      position: fixed;
+      top:0px;
+      left: 0px;
+      min-height: 100vh;
+      width: 100%;
+      background: rgba(255,255,255,0.8);
+      .modal-content{
+        top:50%;
+        padding: 10px;
+        height: 200px;
+        width: 50%;
+        margin: -100px auto auto auto;
+        vertical-align: middle;
+
+      }
+
+    }
+
+    .photo-upload{
+      width: 100%;
+      height: 200px;
+      margin: auto;
+      background-size: contain;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      background-color: #BBB;
+    }
+    .media-upload{
+      padding: 10px 0px;
+      line-height: 20px;
+      position: relative;
+      background: #f2f2f2;
+      cursor: pointer;
+      width: 100%;
+      .upload-file{
+        background: url(../images/candidature/icons/file-upload.svg) no-repeat center center;
+        background-size: 20px 20px;
+        height: 20px;
+        display: block;
+        &.photo{
+          background-size: 30px 30px;
+          height: 60px;
+        }
+      }
+    }
+    .item {
+      padding: 10px 0px;
+      background: #f2f2f2;
+      line-height: 20px;
+      position: relative;
+      vertical-align: top;
+      .link{
+        background: url(../images/candidature/icons/file.svg)  no-repeat center center;
+        background-size: 20px 20px;
+        height: 20px;
+        width: 20%;
+        display: inline-block;
+      }
+      .flag-icon{
+        width: 20%;
+        height: 20px;
+        background-position: center;
+        display: inline-block;
+        line-height: 20px;
+      }
+      .name{
+        width: 50%;
+        text-align: center;
+        display: inline-block;
+        font-weight: bold;
+        text-transform: uppercase;
+        color:black;
+        margin-top:0px;
+      }
+      .trash{
+        background: url(../images/candidature/icons/trash.svg) no-repeat center center;
+        background-size: 20px 20px;
+        width: 20%;
+        height: 20px;
+        display: inline-block;
+        cursor: pointer;
+        line-height: 20px;
+        position: absolute;
+        right: 0px;
+
+      }
+      .cancel{
+        background: url(../images/candidature/icons/cancel.svg) no-repeat center center;
+        width: 20%;
+        height: 20px;
+        display: inline-block;
+        cursor: pointer;
+        position: absolute;
+        right: 0px;
+      }
+      .delete-pane{
+        padding: 10px 0px;
+        line-height: 20px;
+        background: #dc4154;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        .trash{
+          left: 0px;
+        }
+        .name{
+          padding-left: 30%;
+        }
+        .cancel{
+
+        }
+      }
+    }
+
+    .item-list.active{
+      .item-infos{
+        display:block;
+      }
+      .item-summary{
+        display:none;
+      }
+    }
+    .item-list{
+      padding-bottom: 10px;
+      .item-infos
+      {
+        display: none;
+      }
+      .item-summary{
+        background: grey;
+        cursor: pointer;
+        padding: 10px 10px;
+      }
+      .item-infos{}
+      .remove{
+        margin: 10px 0px;
+      }
+    }
+
+
+    .formElt{
+      margin: 50px 0px;
+
+    }
+
+    .right-screen{
+      height: 100vh;
+      padding-right:0px;
+      padding-left:0px;
+
+      .bg{
+        height: 100%;
+        background-size: cover;
+        opacity: 0.5;
+        background-position-y: 33%;
+        position: fixed;
+        overflow: hidden;
+        width: 100%;
+        transition: all 0.5s ease-out;
+
+      }
+      .copyright{
+        position: fixed;
+        bottom: 10px;
+        right: 50px;
+        background-color: rgba(255,255,255,0.75);
+        padding: 1px 20px;
+        font-size: 12px;
+
+      }
+      .step-infos{
+          top:23%;
+          position: absolute;
+          margin-left: 80px;
+          padding-left: 20px;
+          border-left: 5px solid rgb(51, 51, 51);
+          .current{
+            font-size: 64px;
+            font-weight: bold;
+            display: inline-block;
+            line-height: 60px;
+          }
+          .total{
+            font-size: 20px;
+            display: inline-block;
+            vertical-align: top;
+          }
+          .title{
+            font-weight: bold;
+            font-size: 28px;
+            display: block;
+          }
+      }
+    }
+}
+
+
+ span[ng-show*="error"] {
+    color:#dc4154;
+ }
+
+ .disabled{
+   opacity: 0.2
+ }
+
+.btn{
+  &.has-error{
+    opacity: 0.2;
+    pointer-events:none;
+
+  }
+  &.green, &.grey{
+    color: white;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  &.green{
+    background: #B8E986;
+    color: #9B9B9B;
+  }
+  &.grey{
+    background: grey;
+  }
+}
+
+label{
+
+}
+
+ label,
+ input[type="submit"]
+  {
+   display: block;
+ }
+
+ .inline{
+   display: inline-block;
+ }
+ .drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 200px;
+    height: 65px;
+    text-align: center;
+    padding-top: 25px;
+    margin: 10px;
+}
+.dragover {
+    border: 5px dashed blue;
+}
+
+
+
 // print
 @media print {
     .no-print, .no-print * {

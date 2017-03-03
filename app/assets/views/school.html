@@ -3,7 +3,8 @@
     <h2>Promotions</h2>
     <ul class="nav nav-sidebar" class="promotions">
       <li class="promotion" ng-repeat="promotion in promotions">
-        <a ui-sref-active="active" ui-sref="school.promotion({id: promotion.id})"><span class="label label-primary">{{ promotion.starting_year }}-{{ promotion.ending_year }}</span>
+        <a ui-sref-active="active" ui-sref="school.promotion({id: promotion.id})">
+          <span class="label label-primary">{{ promotion.starting_year }}-{{ promotion.ending_year }}</span>
           <span>{{ promotion.name }}</span>
         </a>
       </li>
@@ -11,7 +12,7 @@
   </div>
 
   <div class="col-md-10">
-    <ui-view></ui-view>
+    <div ui-view=content_school_view></div>
   </div>
 
 </div>

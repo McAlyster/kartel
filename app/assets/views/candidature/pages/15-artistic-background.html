@@ -1,0 +1,55 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="en">Help</class></h1>
+   <div class="fr">
+      <p></p>
+   </div>
+   <div class="en">
+      <p></p>
+   </div>
+</div>
+
+<div class="">
+
+  <h1>
+     <span class="fr">Parcours artistique</span>
+     <span class="en">Artistic Background</span>
+  </h1>
+
+
+  <p>Résumé du parcours artistique : </p>
+
+          <div class="field">
+                      <textarea
+                        id="cursus"
+                          ng-model="user.profile.cursus"
+                          ng-model-options='{ debounce: 1000 }'
+                          ng-change="user.patch({profile : {'cursus': user.profile.cursus}})"
+                          placeholder="Année - Expérience, diplôme, ..."
+                          rows="10"
+                          name=uCursus
+                          required
+                      />
+                      <div ng-show="form.uCursus.$touched && form.uCursus.$invalid" ng-messages="form.uCursus.$error" class="help-block error">
+                        <div ng-message="required">
+                          <span class="fr">Obligatoire</span>
+                          <span class="en">required</span>
+                        </div>
+                      </div>
+                      <label for="cursus">
+                        <span class="field-state required"></span>
+                        <span class="fr">Cursus</span>
+                        <span class="en">Cursus</span>
+                      </label>
+              </div>
+
+
+
+
+
+
+  <div class="navigation">
+     <a class="btn prev" ui-sref="candidature.cv"><span class="fr">Retour</span><span class="en">Back</span></a>
+     <a class="btn next" ui-sref="candidature.previous-applications"><span class="fr">Continuer</span><span class="en">Continue</span></a>
+  </div>
+</div>

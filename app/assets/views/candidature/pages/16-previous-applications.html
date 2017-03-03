@@ -1,0 +1,75 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="en">Help</class></h1>
+   <div class="fr">
+        <p>La sélection est limitée à 3 candidatures maximum</p>
+   </div>
+   <div class="en">
+      <p></p>
+   </div>
+</div>
+
+
+<div class="previous">
+
+  <h1>
+     <span class="fr">Candidatures précédentes</span>
+     <span class="en">Previous Applications</span>
+  </h1>
+
+  <form name="form1" ng-submit="form.$valid && submit()" class="css-form" novalidate enctype="multipart/form-data">
+        <div class="field">
+
+                <input type="checkbox"
+                  id="firstime"
+                  ng-model="candidature.first_time"
+                  ng-change="candidature.patch({first_time: candidature.first_time})"
+                  name="cFirst"
+                  ng-value="true"
+                  class="one check"
+                />
+                <label for="firstime" class="big pointer">
+                  <span class="fr">Je me suis déjà présenté(e) à la sélection des candidatures du Fresnoy - Studio national</span>
+                  <span class="en"></span>
+                </label>
+                <div ng-if='candidature.first_time'>
+                  <span>En quelle(s) année(s) ?</span>
+                  <div ng-repeat="item in last_applications_years track by $index" >
+                     <div class="item" ng-init='RC_last[$index]=false'>
+                        <span class="name" ng-bind="item" />
+                        <span class="trash" ng-click="RC_last[$index]=true" />
+                        <div class="delete-pane" ng-show="RC_last[$index]">
+                           <span class="trash" ng-click="last_applications_years.splice($index,1);
+                              candidature.last_applications_years = last_applications_years.join(splitChar); RC_last[$index]=false;
+                              candidature.patch({last_applications_years: last_applications_years.join(splitChar)})" />
+                           <span class="name"><span class="fr">Supprimer</span><span class="en">Delete</span></span>
+                           <span class="cancel" ng-click="RC_last[$index]=false"></span>
+                        </div>
+                     </div>
+                  </div>
+                  <select
+                     ng-model="last_app"
+                     ng-change="last_applications_years.push(last_app); candidature.last_applications_years = last_applications_years.join(splitChar);
+                     candidature.patch({last_applications_years: last_applications_years.join(splitChar)})" >
+                     <option value="">---</option>
+                     <option ng-repeat="year in years" value="{{year}}"> {{year}}
+                     </option>
+                  </select>
+                  <input hidden required type="text" id="last-application-years" ng-model="candidature.last_applications_years" ng-init = "" />
+                  <label for="last-application-years">
+                    <span class="field-state required" ></span>
+                    <span class="fr">Année</span>
+                    <span class="en">Year</span>
+                  </label>
+                </div>
+
+        </div>
+  </form>
+
+
+
+  <div class="navigation">
+     <a class="btn prev" ui-sref="candidature.artistic-background"><span class="fr">Retour</span><span class="en">Back</span></a>
+     <a class="btn next" ui-sref="candidature.motivations"><span class="fr">Continuer</span><span class="en">Continue</span></a>
+  </div>
+</div>

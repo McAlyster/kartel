@@ -1,0 +1,126 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="en">Help</class></h1>
+   <div class="fr">
+      <p></p>
+   </div>
+   <div class="en">
+      <p></p>
+    </div>
+</div>
+
+<div class="summary">
+
+  <h1>Récapitulatif</h1>
+
+  <form name="form" ng-submit="form.$valid && submit()" class="css-form" novalidate>
+
+    <h2><span class="fr">Informations administratives</span><span class="en">Personnal Information</span></h2>
+    <div class="row">
+      <div class="col-xs-12 col-md-7 col-lg-7">
+        <a class="pointer" ui-sref="candidature.administrative-informations">
+          <div><label><span class="fr">Nom</span><span class="en">Name</span></label>  <input type="text" ng-model="user.last_name" readonly required/><span class="isvalid"/></div>
+          <div><label><span class="fr">Prénom</span><span class="en">First name</span></label> <input type="text" ng-model="user.first_name" readonly required/><span class="isvalid"/></div>
+          <div><label><span class="fr">Genre</span><span class="en">Gender</span></label>   <input class="hidden" type="text" ng-model="user.profile.gender" readonly required/><span class="isvalid"/></div>
+          <div><label><span class="fr">Date de Naissance</span><span class="en">Bithdate</span></label>   <input class="hidden" type="text" ng-model="user.profile.birthdate" readonly required/><span class="isvalid"/></div>
+          <div><label><span class="fr">Pays de naissance</span><span class="en">Birth Country</span></label>   <input class="hidden" type="text" ng-model="user.profile.birthplace_country" readonly required/><span class="isvalid"/></div>
+          <div><label><span class="fr">Justificatif d'identité</span><span class="en">Upload Id Card</span></label> <input class="hidden" type="text" ng-model="candidature.identity_card" readonly required /><span class="isvalid"/></div>
+          <div><label><span class="fr">Nationalité(s)</span><span class="en">Nationality</span></label>   <input class="hidden" type="text" ng-model="user.profile.nationality" readonly required/><span class="isvalid"/></div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-md-5 col-lg-5">
+        <a class="pointer" ui-sref="candidature.photography">
+          <div><label><span class="fr">Photo </span><span class="en">photo </span></label> <input class="hidden" ng-model="user.profile.photo" type="text" readonly required  /><span class="isvalid"/></div>
+        </a>
+        <a class="pointer" ui-sref="candidature.contact-informations">
+          <div><label><span class="fr">Tel </span><span class="en">Phone </span></label>   <input class="hidden" ng-pattern="phone_pattern" ng-model="user.profile.homeland_phone" type="text" readonly required  /><span class="isvalid"/></div>
+        </a>
+        <a class="pointer" ui-sref="candidature.spoken-languages">
+          <div><label><span class="fr">Langue maternelle </span><span class="en">Mother tongue</span></label> <input class="hidden" ng-model="user.profile.mother_tongue" type="text" readonly required  /><span class="isvalid"/></div>
+          <div ng-show="user.profile.other_language"><label><span class="fr">Autres langues </span><span class="en">Other languages</span></label>   <input class="hidden" ng-model="user.profile.other_language" type="text" readonly /><span class="isvalid"/></div>
+        </a>
+
+        <a class="pointer" ui-sref="candidature.contact-informations">
+          <div><label><span class="fr">Adresse</span><span class="en">Adress</span></label>
+            <input ng-class="{'hidden' : user.profile.homeland_address}" placeholder="Adresse" type="text" ng-model="user.profile.homeland_address" readonly required  /><span class="isvalid"/>
+            <input ng-class="{'hidden' : user.profile.homeland_zipcode}" placeholder="Code Postal" type="text" ng-model="user.profile.homeland_zipcode" readonly required  /><span class="isvalid"/>
+            <input ng-class="{'hidden' : user.profile.homeland_town}" placeholder="Ville" type="text" ng-model="user.profile.homeland_town" readonly required  /><span class="isvalid"/>
+            <input ng-class="{'hidden' : user.profile.homeland_country}" placeholder="Pays" type="text" ng-model="user.profile.homeland_country" readonly required  /><span class="isvalid"/>
+          </div>
+        </a>
+
+      </div>
+    </div>
+    <hr>
+    <h2>Parcours</h2>
+    <div class="row">
+      <div class="col-xs-12 col-md-6 col-lg-6">
+        <a class="pointer" ui-sref="candidature.curiculum">
+          <div ><label><span class="fr">Master / 7 ans exp. art.</span><span class="en">Master / 7 year exp. art.</span></label>   <input class="hidden" type="text" ng-model="candidature.master_degree" readonly required/><span class="isvalid" /></div>
+        </a>
+        <a class="pointer" ui-sref="candidature.cv">
+          <div><label><span class="fr">CV</span><span class="en">CV</span></label> <input class="hidden" type="text" ng-model="candidature.curriculum_vitae" readonly required/><span class="isvalid" /></div>
+        </a>
+        <a class="pointer" ui-sref="candidature.artistic-background">
+          <div><label><span class="fr">Cursus</span><span class="en">Cursus</span></label>  <input class="hidden" type="text" ng-model="user.profile.cursus" readonly required/><span class="isvalid" /></div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-md-6 col-lg-6">
+        <div ng-if='candidature.master_degree==false'>
+          <a class="pointer" ui-sref="candidature.curiculum">
+            <label><span class="fr">Argumentaire</span><span class="en">Argument</span></label><input class="hidden" type="text" ng-model="candidature.experience_justification" readonly required /><span class="isvalid"/>
+          </a>
+        </div>
+        <div>
+            <div ng-if="cursus_justifications.media.length">
+              <a class="pointer" ui-sref="candidature.cv">
+                <label><span class="fr">Documents</span><span class="en">Documents</span></label>
+                <div ng-repeat="item in cursus_justifications.media" ng-model="cursus_justifications.media">
+                  <input type="text" ng-if='item.picture' ng-model="((item.picture || item.file) && item.label)" readonly required /><span class="isvalid"/>
+                </div>
+              </a>
+            </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12 col-md-6 col-lg-6">
+        <h3><span class="fr">Projet première année</span><span class="en">First year project</span></h3>
+        <a class="pointer" ui-sref="candidature.intentions-project-1">
+          <div><label><span class="fr">Description</span><span class="en">Description</span></label> <input class="hidden" type="text" ng-model="candidature.considered_project_1" readonly required/><span class="isvalid" /></div>
+          <div><label><span class="fr">Références artistiques</span><span class="en">Art referencies</span></label> <input class="hidden" type="text" ng-model="candidature.artistic_referencies_project_1" readonly required/><span class="isvalid" /></div>
+        </a>
+        <br/>
+        <a class="pointer" ui-sref="candidature.motivations">
+          <div><label><span class="fr">Lettre de motivation</span><span class="en">Cover letter</span></label> <input class="hidden" type="text" ng-model="candidature.justification_letter" readonly required/><span class="isvalid" /></div>
+        </a>
+
+
+      </div>
+      <div class="col-xs-12 col-md-6 col-lg-6">
+
+        <h3><span class="fr">Projet deuxième année</span><span class="en">Second year project</span></h3>
+        <a class="pointer" ui-sref="candidature.intentions-project-2">
+          <div><label><span class="fr">Description</span><span class="en">Description</span></label> <input class="hidden" type="text" ng-model="candidature.considered_project_2" readonly required/><span class="isvalid" /></div>
+          <div><label><span class="fr">Références artistiques</span><span class="en"> Art referencies</span></label> <input class="hidden" type="text" ng-model="candidature.artistic_referencies_project_2" readonly required/><span class="isvalid" /></div>
+        </a>
+        <br/>
+        <a class="pointer" ui-sref="candidature.visual-elements">
+          <div><label><span class="fr">Vidéo de présentation</span><span class="en">presentation video</span></label>
+            <span ng-if='!candidature.physical_content'><input class="hidden" type="url" ng-model="candidature.presentation_video" readonly required/>  <span class="isvalid" /></span>
+            <span ng-if='candidature.physical_content'><input class="hidden" type="text" ng-model="candidature.physical_content" readonly required/>  <span class="isvalid" /></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </form>
+
+
+
+
+  <div class="navigation">
+     <a class="btn prev" ui-sref="candidature.visual-elements"><span class="fr">Retour</span><span class="en">Back</span></a>
+     <a class="btn next" ui-sref="candidature.interview" ng-class="{ 'has-error': form.$invalid }" ><span class="fr">Continuer</span><span class="en">Continue</span></a>
+  </div>
+</div>

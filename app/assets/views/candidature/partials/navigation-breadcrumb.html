@@ -1,0 +1,25 @@
+<div class="navigation breadcrumb " ng-show="isAuthenticated && !upload_percentage<99">
+  <ul class="list-inline small">
+    <li ng-class="{'current': $state.current.name == 'candidature.administrative-informations'}">
+      <a class="pointer" ui-sref="candidature.administrative-informations">
+      <span class="square"></span>
+      <div class="rollover"><span class="fr">Informations administratives</span><span class="en">/////</span></div>
+    </a></li>
+    <li ng-class="{'current': $state.current.name == 'candidature.curiculum'}">
+      <a class="pointer" ui-sref="candidature.curiculum">
+      <span class="square"></span>
+      <div class="rollover"><span class="fr">Parcours</span><span class="en">////</span></div>
+    </a></li>
+    <li ng-class="{'current': $state.current.name == 'candidature.motivations'}">
+      <a class="pointer" ui-sref="candidature.motivations">
+      <span class="square"></span>
+      <div class="rollover"><span class="fr">Motivations</span><span class="en">////</span></div>
+    </a></li>
+    <li ng-class="{'current': $state.current.name == 'candidature.summay'}">
+      <a class="pointer" ui-sref="candidature.summary">
+      <span class="square"></span>
+      <div class="rollover"><span class="fr">Récapitulatif</span><span class="en">////</span></div>
+    </a></li>
+
+  </ul>
+</div>

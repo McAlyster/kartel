@@ -1,0 +1,108 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="fr">Help</class></h1>
+   <div class="fr">
+     <p><u>Cocher la case correspondant à votre situation</u></p>
+     <p>
+        Les candidats doivent pouvoir justifier :
+     <ul>
+        <li>soit du Baccalauréat (ou équivalence reconnue)
+           et 5 années d’études attestées par un titre ou
+           diplôme,
+        </li>
+        <li>soit du Baccalauréat (ou équivalence
+           reconnue) et 7 années d’expérience artistique
+           ou professionnelle, et sous réserve de joindre
+           au dossier d’inscription administrative un
+           argumentaire, une page maximum, précisant
+           en quoi leur expérience les a préparés au
+           cursus du Fresnoy.
+        </li>
+     </ul>
+     </p>
+   </div>
+   <div class="en">
+      <p></p>
+   </div>
+</div>
+
+<div class="curiculum">
+   <h1>
+      <span class="fr">Cursus</span>
+      <span class="en">Cursus</span>
+   </h1>
+   <form name="form" ng-submit="form.$valid && submit()" class="css-form" novalidate enctype="multipart/form-data">
+      <div class="field">
+         <p>Cocher la case correspondant à votre situation : </p>
+         <input type="radio"
+            id="master-degree"
+            ng-model="candidature.master_degree"
+            ng-change="candidature.patch({master_degree: candidature.master_degree})"
+            name="cMaster"
+            ng-value="true"
+            class="one check "
+            />
+         <label for="master-degree" class="checkbox one big pointer">
+         <span class="fr">J'ai un master (bac + 5)</span>
+         <span class="en">Master degree</span>
+         </label>
+      </div>
+      <div class="field">
+         <input type="radio"
+            id="no-master-degree"
+            ng-model="candidature.master_degree"
+            ng-change="candidature.patch({master_degree: candidature.master_degree})"
+            name="cMaster"
+            ng-value="false"
+            class="one check"
+            />
+         <label for="no-master-degree" class="checkbox one big pointer">
+         <span class="fr">BAC + 7 années<br/><small>d'expérience professionnelle attestée</small></span>
+         <span class="en">//////////////</span>
+         </label>
+      </div>
+      <div ng-if="candidature.master_degree==false">
+         <p>Dites nous en quoi cette expérience vous a préparé au Fresnoy (1 page)</p>
+         <input id="exp-justification" ng-model="candidature.experience_justification" required hidden />
+         <div ng-model="candidature.experience_justification"
+            class="media-upload"
+            ng-show="!candidature.experience_justification"
+            ngf-select="upload(candidature.experience_justification, candidature, 'experience_justification')"
+            ngf-capture="'camera'"
+            accept="application/pdf"
+            ngf-accept="'application/pdf'"
+            ngf-pattern="'application/pdf'"
+            ngf-model-invalid="invalidExperienceJustification"
+            name="jExp"
+            required
+            >
+            <span class="upload-file" />
+         </div>
+         <div class="item" ng-if="candidature.experience_justification" ng-init='RC_exp=false'>
+            <a class="link" target='_blank' href="{{candidature.experience_justification}}"><img  /></a>
+            <span class="name">{{candidature.experience_justification.split('.').pop()}}</span>
+            <span class="trash" ng-click="RC_exp=true" />
+            <div class="delete-pane" ng-show="RC_exp">
+               <span class="trash" ng-click="candidature.experience_justification=''; RC_exp=false" />
+               <span class="name"><span class="fr">Supprimer</span><span class="en">Delete</span></span>
+               <span class="cancel" ng-click="RC_exp=false"></span>
+            </div>
+         </div>
+         <div ng-show="invalidExperienceJustification.$errorMessages" ng-messages="invalidExperienceJustification.$errorMessages" class="help-block error">
+            <div ng-message="pattern">
+               <span class="fr">Format accepté :pdf</span>
+               <span class="en">Accepted format : pdf</span>
+            </div>
+         </div>
+         <label class="topborder" for="exp-justification">
+         <span class="field-state"></span>
+         <span class="fr">Justification d'expérience</span>
+         <span class="en">Experience justification</span>
+         </label>
+      </div>
+   </form>
+   <div class="navigation">
+      <a class="btn prev" ui-sref="candidature.photography"><span class="fr">Retour</span><span class="en">Back</span></a>
+      <a class="btn next" ui-sref="candidature.cv"><span class="fr">Continuer</span><span class="en">Continue</span></a>
+   </div>
+</div>

@@ -21,6 +21,7 @@ exports.config =
                                 ]
                                 'js/app.js': [
                                         'app/scripts/*.coffee'
+                                        'app/scripts/candidature/*.coffee'
                                         'app/scripts/common/**/*.coffee'
                                         'app/scripts/*.js'
                                 ]

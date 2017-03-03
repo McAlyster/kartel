@@ -1,0 +1,184 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="en">Help</class></h1>
+   <div class="fr">
+      <p></p>
+   </div>
+   <div class="en">
+      <p></p>
+    </div>
+</div>
+
+
+<div class="">
+   <h1>
+      <span class="fr">Éléments Visuels</span>
+      <span class="en">Visual elements</span>
+   </h1>
+   <form name="form1" ng-submit="form.$valid && submit()" class="css-form" novalidate>
+      <p>Saisir ci-dessous le lien vidéo vers une œuvre ou un ensemble d’extraits d’œuvres que vous avez réalisés et
+         particulièrement représentatifs de votre démarche artistique.
+      </p>
+      <p>Cette vidéo d'une <strong>durée maximale de 8 minutes</strong> sera vue successivement par les deux jurys (de préselection et de l'entretien oral).</p>
+      <div class="field" ng-show="!candidature.physical_content">
+         <input
+            type="url"
+            id = "video"
+            name = "cVideo"
+            ng-model="candidature.presentation_video"
+            ng-model-options='{ debounce: 1000 }'
+            ng-change="candidature.patch({presentation_video : candidature.presentation_video})"
+            placeholder="Url"
+            required
+            />
+         <div ng-show="form1.cVideo.$touched && form1.cVideo.$invalid" ng-messages="form1.cVideo.$error" class="help-block error">
+            <div ng-message="required">
+               <span class="fr">Obligatoire</span>
+               <span class="en">required</span>
+            </div>
+            <div ng-message="url">
+               <span class="fr">URL mal formatée</span>
+               <span class="en">Error url</span>
+            </div>
+         </div>
+         <label for="video">
+             <span class="field-state required"></span>
+             <span class="fr">Lien vidéo (8 minutes maximum) format mp4</span>
+             <span class="en">Video Links</span>
+         </label>
+
+         <p>Préciser le contenu du ou des visuels : </p>
+         <textarea
+            ng-model="candidature.presentation_video_details"
+            ng-model-options='{ debounce: 1000 }'
+            ng-change="candidature.patch({presentation_video_details : candidature.presentation_video_details})"
+            placeholder=""
+            rows="2"
+            required=""
+            >
+         </textarea>
+         <label>
+             <span class="field-state required"></span>
+             <span class="fr">Contenu visuels</span>
+             <span class="en">Visuel content</span>
+         </label>
+      </div>
+
+      <div>
+         <div ng-if="!candidature.physical_content && candidature.presentation_video">
+            <iframe ng-if="_isAvailableVideo" height="100px" width="200px"  ng-src="{{trustSrc(candidature.presentation_video)}}" />
+            <div ng-if="candidature.presentation_video && candidature.presentation_video.indexOf('player.vimeo.com/video')>0 && !_isAvailableVideo">
+               La vidéo est bien envoyée et sera disponible pour vérification dans quelques minutes,
+               n'hésitez pas à revenir plus tard sur votre inscription pour la consulter
+            </div>
+           <a class="btn" ng-show="_isAvailableVideo && candidature.presentation_video.indexOf('player.vimeo.com/video')>0" ng-click='deleteVimeoVideo(candidature.presentation_video.split("/").pop(), candidature, "presentation_video")'>
+              Effacer la vidéo
+           </a>
+        </div>
+      </div>
+      <br>
+      <br>
+      <hr/>
+      <div class='' ng-show="!candidature.physical_content" >
+            <h4>Si vous ne pouvez pas fournir un lien vers une vidéo<br/>Vous pouvez :</h4>
+            <p> - nous envoyer la vidéo, en cliquant ci-dessous : </p>
+            <div ng-model="video" name="uVideo"
+               ngf-select="uploadVimeo(video, candidature, 'presentation_video')"
+               ngf-capture="'camera'"
+               accept="video/*"
+               ngf-accept="'video/*'"
+               ngf-pattern="'video/*'"
+               ngf-model-invalid="invalidVideo"
+               ng-show="!candidature.presentation_video"
+               class="media-upload"
+               ng-show='!candidature.presentation_video'
+               >
+               <span class="upload-file" />
+            </div>
+            <div ng-show="invalidVideo.$errorMessages" ng-messages="invalidVideo.$errorMessages" class="help-block error">
+               <div ng-message="pattern">
+                  <span class="fr">Fichier non reconnu comme étant une vidéo</span>
+                  <span class="en">this is not a vidéo file</span>
+               </div>
+            </div>
+
+            <p>
+               <a href='https://vimeo.com/help/compression' target='_blank'>
+               voir les spécifications pour un rendu optimal</a>
+            </p>
+            <p>
+               - nous envoyer la vidéo par courrier (cocher la case ci-dessous)
+            </p>
+      </div>
+      <div class="field">
+         <input
+            type="checkbox"
+            id="asynchronous-element"
+            ng-model="candidature.physical_content"
+            name="aAsynchone"
+            class="one check"
+            ng-value=true
+            />
+         <label class="check one pointer" for='asynchronous-element'>
+             <span class="fr">J'envoie un fichier MP4 ou
+             ProRes sur une clef USB</span>
+             <span class="en">I can not send you the video, send it by mail</span>
+         </label>
+         <div ng-if="!candidature.physical_content" class="alert" >
+            <div ng-init='candidature.patch({physical_content_description: "", physical_content: false})' ></div>
+          </div>
+         <div ng-if="candidature.physical_content" class="alert" >
+            <div ng-init='candidature.patch({physical_content_description: "Film sur Clef USB", physical_content: true})' />
+            <span class="fr"> Il est impératif d'indiquer la référence de votre dossier sur la clef USB.</span>
+            <span class="en"> Don't forget to give us your application number </span>
+            <strong>{{candidature.current_year_application_count}}</strong>
+            <p>
+               à l'adresse suivante :
+            </p>
+            <p>
+               Pédagogie - Concours 2017<br/>
+               Le Fresnoy - Studio national <br/>des arts contemporains<br/>
+               22 rue du Fresnoy <br/>
+               BP 80179 <br/>
+               59202 Tourcoing Cedex <br/>
+               France
+            </p>
+            <p>Préciser le contenu du ou des visuels : </p>
+            <textarea
+               ng-model="candidature.presentation_video_details"
+               ng-model-options='{ debounce: 1000 }'
+               ng-change="candidature.patch({presentation_video_details : candidature.presentation_video_details})"
+               placeholder=""
+               rows="2"
+               required=""
+               >
+            </textarea>
+            <label>
+                <span class="field-state required"></span>
+                <span class="fr">Contenu visuels</span>
+                <span class="en">Visuel content</span>
+            </label>
+         </div>
+
+      </div>
+      <hr/>
+      <div class="field">
+         <input
+            type="checkbox"
+            id="honor"
+            ng-model="honor"
+            name="aHonor"
+            class="one check"
+            />
+         <label class="check one pointer" for='honor'>
+         <span class="fr">Je déclare sur l'honneur que tous
+         les documents visuels soumis au jury sont réalisés par moi seul, sans aucune aide ou intervention extérieure.</span>
+         <span class="en"> /// </span>
+         </label>
+      </div>
+   </form>
+   <div class="navigation">
+      <a class="btn prev" ui-sref="candidature.intentions-project-2"><span class="fr">Retour</span><span class="en">Back</span></a>
+      <a class="btn next" ui-sref="candidature.summary" ng-class="{ 'has-error': honor==false }" ><span class="fr">Continuer</span><span class="en">Continue</span></a>
+   </div>
+</div>

@@ -1,0 +1,49 @@
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" ui-sref="home"><img src="images/logo.png" height="27px"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-left">
+        <li ui-sref-active="active"><a ui-sref="school"><i class="glyphicon glyphicon-education"></i>&nbsp;&nbsp;Ecole</a></li>
+        <li ui-sref-active="active"><a ui-sref="artist"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Artistes</a></li>
+        <li ui-sref-active="active"><a ui-sref="artwork"><i class="glyphicon glyphicon-picture"></i>&nbsp;&nbsp;Oeuvres</a></li>
+      </ul>
+      <script type="text/ng-template" id="customTemplate.html">
+        <a ng-click="goTo()">
+          <div class="media">
+            <div class="media-left">
+              <div ng-if="match.model.user">
+                <fresnoy-thumbnail ng-if="match.model.user.photo" class="media-object" thurl="'media/' + match.model.user.photo" thwidth="40" thheight="40"></fresnoy-thumbnail>
+                <img ng-if="!match.model.user.photo" src="images/anonymous.jpg" width="40" height="40" alt="no picture">
+              </div>
+              <div ng-if="!match.model.user">
+                <fresnoy-thumbnail ng-if="match.model.picture" class="media-object" thurl="match.model.picture" thwidth="40" thheight="40"></fresnoy-thumbnail>
+                <img ng-if="!match.model.picture" src="images/anonymous.jpg" width="40" height="40" alt="no picture">
+              </div>
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading" ng-if="!match.model.user" bind-html-unsafe="match.model.title | uibTypeaheadHighlight:query"></h4>
+              <h4 class="media-heading" ng-if="match.model.user"><span ng-bind-html="match.model.user.first_name | uibTypeaheadHighlight:query"></span> <span ng-bind-html="match.model.user.last_name | uibTypeaheadHighlight:query"></span> </h4>
+
+              <span ng-if="!match.model.user" class="author">{{ match.model.authors[0].user.first_name }} {{ match.model.authors[0].user.last_name }}</span>
+              <span ng-if="match.model.nickname" class="nickname">{{ match.model.nickname }}</span>
+            </div>
+          </div>
+        </a>
+      </script>
+
+      <form class="quicksearch navbar-form navbar-left" ng-controller="QuickSearch">
+        <input uib-typeahead="object for objects in search($viewValue)" typeahead-wait-ms="200" typeahead-min-length="3" typeahead-template-url="customTemplate.html" ng-model="selected" typeahead-loading="loading" typeahead-editable="false" typeahead-on-select="goTo($item, $model, $label)" type="text" class="form-control" placeholder="Rechercher...">
+        <i ng-show="loading" class="loading-glyph glyphicon glyphicon-refresh"></i>
+      </form>
+    </div>
+  </div>
+</nav>

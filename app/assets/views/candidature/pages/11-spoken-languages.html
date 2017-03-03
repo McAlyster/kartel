@@ -1,0 +1,79 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="en">Help</class></h1>
+   <div class="fr">
+      <p></p>
+   </div>
+   <div class="en">
+      <p></p>
+   </div>
+</div>
+
+<div class="languages">
+   <h1>
+      <span class="fr">Langues</span>
+      <span class="en">Languages</span>
+   </h1>
+   <form name="form3" ng-submit="form3.$valid && submit()" class="css-form" novalidate>
+      <div class="field">
+         <select
+            id="mother-tongue"
+            ng-model="user.profile.mother_tongue"
+            name="uMotherTongue"
+            ng-change="saveUserModel(user)"
+            required>
+            <option value="">{{languageSelectOption[language]}}</option>
+            <option ng-repeat="lang in LANGUAGES" value="{{lang[0].split('-')[0]}}">
+               {{lang[1].englishName}}
+            </option>
+         </select>
+         <div ng-show="form3.uMotherTongue.$touched && form3.uMotherTongue.$invalid" ng-messages="form3.uMotherTongue.$error" class="help-block error">
+            <div ng-message="required">
+               <span class="fr">Obligatoire</span>
+               <span class="en">Required</span>
+            </div>
+         </div>
+         <label for="mother-tongue">
+         <span class="field-state"></span>
+         <span class="fr">Langue maternelle</span>
+         <span class="en">Mother Tongues</span>
+         </label>
+      </div>
+      <div class="field">
+         <input hidden type="text" id="other-languages" ng-model="user.profile.other_language" ng-init = "initLanguages()" />
+         <div ng-repeat="item in other_language track by $index" >
+            <div class="item" ng-init='RC_lang[$index]=false'>
+               <span class="flag-icon flag-icon-{{item | lowercase}}" />
+               <span class="name" ng-bind="LANGUAGES_NAME[item].nativeName" />
+               <span class="trash" ng-click="RC_lang[$index]=true" />
+               <div class="delete-pane" ng-show="RC_lang[$index]">
+                  <span class="trash" ng-click="other_language.splice($index,1);
+                     user.profile.other_language = other_language.join(splitChar); RC_lang[$index]=false;
+                     user.patch({'profile':{'other_language': other_language.join(splitChar)}})" />
+                  <span class="name"><span class="fr">Supprimer</span><span class="en">Delete</span></span>
+                  <span class="cancel" ng-click="RC_lang[$index]=false"></span>
+               </div>
+            </div>
+         </div>
+         <select
+            ng-model = "langue"
+            ng-change="other_language.push(langue); user.profile.other_language = other_language.join(splitChar);
+            user.patch({'profile':{'other_language': user.profile.other_language}}); langue='';"
+            >
+            <option value="">{{languageSelectOption[language]}}</option>
+            <option ng-repeat="lang in LANGUAGES" value="{{lang[0].split('-')[0]}}">
+               {{lang[1].englishName}}
+            </option>
+         </select>
+         <label class="" for="other-languages">
+         <span class="field-state"></span>
+         <span class="fr">Autres langues parlées</span>
+         <span class="en">Other languages</span>
+         </label>
+      </div>
+   </form>
+   <div class="navigation">
+      <a class="btn prev" ui-sref="candidature.contact-informations"><span class="fr">Retour</span><span class="en">Back</span></a>
+      <a class="btn next" ui-sref="candidature.photography"><span class="fr">Continuer</span><span class="en">Continue</span></a>
+   </div>
+</div>

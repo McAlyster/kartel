@@ -1,0 +1,50 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="en">Help</class></h1>
+   <div class="fr">
+      <p></p>
+   </div>
+   <div class="en">
+      <p></p>
+    </div>
+</div>
+
+<div class="confirmation">
+   <h1>
+      <span class="fr">Finalisation</span>
+      <span class="en">Finalization</span>
+   </h1>
+   <p>
+      Pour toutes précisions, vous pouvez nous laisser un message ci-dessous :
+   </p>
+   <textarea
+      id="remark"
+      ng-model="candidature.remark"
+      ng-model-options='{ debounce: 1000 }'
+      ng-change="candidature.patch({remark: candidature.remark})"
+      placeholder="Message"
+      rows="10"
+      />
+   <label for="remark">
+   <span class="fr">Informations complémentaires</span>
+   <span class="en">Additionnal information</span>
+   </label>
+   <br/>
+   <br/>
+   <p>
+      Votre candidature est maintenant complète.<br/>Pour la valider définitivement, cliquez sur le
+      bouton <br/>ci-dessous :
+   </p>
+   <a class="block btn green" ng-init="validation=false" ng-show="!validation" ng-click="validation = !validation">
+   Valider
+   </a>
+   <div class="" ng-if="validation" >
+      <p class="text-danger" style="border:2px solid red; padding:20px;">
+         La validation est définitive. Vous ne pourrez plus modifier vos informations après avoir cliqué.
+      </p>
+      <a class="block btn green" ui-sref="candidature.confirmation" ng-click="candidature.patch({application_completed: true})">
+      Je valide définitivement <br>ma candidature <br>au concours 2017<br>du Fresnoy - Studio national
+      </a>
+   </div>
+
+</div>

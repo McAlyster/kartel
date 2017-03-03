@@ -1,0 +1,61 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="en">Help</class></h1>
+   <div class="fr">
+      <p></p>
+   </div>
+   <div class="en">
+      <p></p>
+    </div>
+</div>
+
+<div class="confirmation">
+
+  <div class="green">
+        <h1>
+          Procédure de sélection
+        </h1>
+
+        <p>
+          VOTRE
+  CANDIDATURE
+  A BIEN ÉTÉ
+  TRANSMISE.<br/>
+  Référence de votre dossier :
+        </p>
+        <div style="text-align:center">
+          <big><strong>
+            {{ candidature.current_year_application_count}}
+          </strong>
+        </big>
+        </div>
+
+  </div>
+
+  <div ng-if="!candidature.application_complete">
+    Un email de confirmation vous sera adressé prochainement.
+  </div>
+  <div ng-if="candidature.application_complete">
+    <p>Votre candidature est confirmée</p>
+  </div>
+  <div ng-show="candidature.physical_content">
+    <div ng-if="!candidature.physical_content_received">
+      <p>x Nous n'avons pas reçu la clef USB.</p>
+    </div>
+    <div ng-if="candidature.physical_content_received">
+      <p>√ Nous avons reçu la clef USB.</p>
+    </div>
+
+
+
+  </div>
+
+  <h2>Entretiens</h2>
+  <p>Les candidats présélectionnés sont conviés à un entretien avec un jury entre le lundi 3 et le vendredi 7 juillet 2017.</p>
+
+  <h2>Annonce des résultats</h2>
+  <p>La liste des 24 candidats admis sera affichée au Fresnoy et mise en ligne sur son site internet www.lefresnoy.net, le lundi 10 juillet 2017. <br/>Les résultats peuvent être communiqués par téléphone le jour même de 14h00 à 18h00 au +33(0)3 20 28 38 53.<br>
+  Les admissions sont valables pour l’année scolaire 2017–2018. <br/>Aucun candidat admis ne peut prétendre différer son intégration, ni se prévaloir de son admission pour une autre année scolaire.</p>
+
+
+</div>

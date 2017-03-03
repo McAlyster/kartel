@@ -1,0 +1,171 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="en">Help</class></h1>
+   <div class="fr">
+      <p></p>
+   </div>
+   <div class="en">
+      <p></p>
+   </div>
+</div>
+
+
+<div class="contact-informations">
+   <h1>
+      <span class="fr">Informations administratives</span>
+      <span class="en">Registration</span>
+   </h1>
+   <form name="form2" ng-submit="form2.$valid && submit()" class="css-form" novalidate>
+      <div class="field">
+         <textarea
+            name="uHomelandAdress"
+            ng-model="user.profile.homeland_address"
+            id="homeland_country"
+            placeholder=""
+            ng-change="saveUserModel(user)"
+            ng-model-options='{ debounce: 1000 }'
+            rows="3"
+            required
+            /></textarea>
+         <div ng-show="form2.uHomelandAdress.$touched && form2.uHomelandAdress.$invalid" ng-messages="form2.uHomelandAdress.$error" class="help-block error">
+            <div ng-message="required">
+               <span class="fr">Obligatoire</span>
+               <span class="en">Required</span>
+            </div>
+         </div>
+         <label for="homeland_country">
+         <span class="field-state"></span>
+         <span class="fr">Adresse</span>
+         <span class="en">Adress</span>
+         </label>
+      </div>
+      <div class="field">
+         <input type="text"
+            name="uHomelandZip"
+            id="homeland_zip"
+            ng-model="user.profile.homeland_zipcode"
+            ng-model-options='{ debounce: 1000 }'
+            ng-change="saveUserModel(user)"
+            required
+            />
+         <div ng-show="form2.uHomelandZip.$touched && form2.uHomelandZip.$invalid" ng-messages="form2.uHomelandZip.$error" class="help-block error">
+            <div ng-message="required">
+               <span class="fr">Obligatoire</span>
+               <span class="en">Required</span>
+            </div>
+         </div>
+         <label for="homeland_zip">
+         <span class="field-state"></span>
+         <span class="fr">Code postal</span>
+         <span class="en">Zip code</span>
+         </label>
+      </div>
+      <div class="field">
+         <input type="text"
+            name="uHomelandCity"
+            id="homeland_city"
+            ng-model="user.profile.homeland_town"
+            ng-change="saveUserModel(user)"
+            ng-model-options='{ debounce: 1000 }'
+            required
+            />
+         <div ng-show="form2.uHomelandCity.$touched && form2.uHomelandCity.$invalid" ng-messages="form2.uHomelandCity.$error" class="help-block error">
+            <div ng-message="required">
+               <span class="fr">Obligatoire</span>
+               <span class="en">Required</span>
+            </div>
+         </div>
+         <label for="homeland_city">
+         <span class="field-state"></span>
+         <span class="fr">Ville</span>
+         <span class="en">City</span>
+         </label>
+      </div>
+      <div class="field">
+         <select ng-model="user.profile.homeland_country"
+            id="homeland_country"
+            name="uHomelandCountry"
+            ng-change="saveUserModel(user)"
+            required
+            >
+            <option value="">-- Select a Country --</option>
+            <option ng-repeat="(country,code) in countries" value="{{code}}">{{country}}</option>
+         </select>
+         <div ng-show="form2.uHomelandCountry.$touched && form2.uHomelandCountry.$invalid" ng-messages="form2.uHomelandCountry.$error" class="help-block error">
+            <div ng-message="required">
+               <span class="fr">Obligatoire</span>
+               <span class="en">Required</span>
+            </div>
+         </div>
+         <label for="homeland_country">
+         <span class="field-state"></span>
+         <span class="fr">Pays</span>
+         <span class="en">Homeland Country</span>
+         </label>
+      </div>
+      <div class="field">
+         <input
+            id="phone"
+            type="text"
+            ng-change="saveUserModel(user)"
+            placeholder="+33320283982"
+            name="uHomelandPhone"
+            ng-pattern="phone_pattern"
+            ng-model="user.profile.homeland_phone"
+            ng-change="saveUserModel(user)"
+            ng-minlength="10" ng-maxlength="20" required
+            hidden
+            />
+
+
+        <div class="row">
+          <div class="col-xs-3 col-md-3 col-lg-3">
+            <input
+               type="text"
+               placeholder=""
+               ng-model="phone_country"
+               ng-change="user.profile.homeland_phone = '+' + phone_country +' '+ phone_number;"
+               class="phone_code"
+               />
+             <label for="phone_code">
+               <span class="fr">Indicatif</span>
+               <span class="en">Phone code</span>
+             </label>
+          </div>
+
+          <div class="col-xs-9 col-md-9 col-lg-9">
+             <input
+                type="text"
+                placeholder=""
+                ng-model="phone_number"
+                ng-change="user.profile.homeland_phone = '+' + phone_country + ' ' + phone_number;"
+                />
+
+             <label for="phone">
+               <span class="field-state"></span>
+               <span class="fr">Numéro de téléphone <br/>[33 123456789]</span>
+               <span class="en">Phone number [33 123456789]</span>
+             </label>
+          </div>
+        </div>
+        <div ng-show="user.profile.homeland_phone && form2.uHomelandPhone.$invalid" ng-messages="form2.uHomelandPhone.$error" class="help-block error">
+           <div ng-message="required">
+              <span class="fr">Obligatoire</span>
+              <span class="en">Required</span>
+           </div>
+           <div ng-message="maxlength">
+              <span class="fr">Pas plus de 20 signes</span>
+              <span class="en">Phone no not more than 20 char</span>
+           </div>
+           <div ng-message="pattern">
+              <span class="fr">Le numéro doit être du type [33 123456789]</span>
+              <span class="en">Number type [33 123456789]</span>
+           </div>
+        </div>
+      </div>
+   </form>
+   <div class="navigation">
+      <a class="btn prev" ui-sref="candidature.administrative-informations"><span class="fr">Retour</span><span class="en">Back</span></a>
+      <a class="btn next" ui-sref="candidature.spoken-languages"><span class="fr">Continuer</span><span class="en">Continue</span></a>
+   </div>
+</div>

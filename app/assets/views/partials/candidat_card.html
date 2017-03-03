@@ -1,0 +1,14 @@
+<div class="candidat-card col-md-2">
+  <a ui-sref="candidatures.candidat({id: candidature.id})">
+    <div class="thumbnail">
+      <fresnoy-thumbnail ng-if="candidature.artist.user.profile.photo" thurl="application.artist.user.profile.photo" thwidth="300" thheight="200"></fresnoy-thumbnail>
+      <img ng-if="candidature.artist.user.profile.photo" src="{{candidature.artist.user.profile.photo}}" alt="..">
+      <img ng-if="!candidature.artist.user.profile.photo" src="images/anonymous.jpg" alt="..">
+      <div class="caption">
+        {{ candidature.artist.user.first_name }}
+
+         <strong>{{ candidature.artist.user.last_name }}</strong>
+      </div>
+    </div>
+  </a>
+</div>

@@ -1,0 +1,77 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="en">Help</class></h1>
+   <div class="fr">
+      <p></p>
+   </div>
+   <div class="en">
+      <p></p>
+   </div>
+</div>
+
+<div class="photo">
+
+  <h1>
+     <span class="fr">Photographie</span>
+     <span class="en">Photography</span>
+  </h1>
+
+  <p class="fr">Envoyer nous une photo de vous</p>
+  <p class="en"></p>
+
+   <form name="form4" ng-submit="form4.$valid && submit()" class="css-form" novalidate enctype="multipart/form-data">
+      <div class="field">
+         <input id="photo" ng-model="user.profile.photo" required hidden />
+         <div
+            class="media-upload"
+            ng-model="user.profile.photo"
+            ngf-select="uploadPhoto(user.profile.photo, user, form4)"
+            name="uPhoto"
+            ngf-capture="'camera'"
+            ngf-max-size="10MB"
+            ngf-accept="'image/*'"
+            ngf-pattern="'image/*'"
+            ngf-model-invalid="invalidPhoto"
+            ng-show='!user.profile.photo'
+            >
+            <span class="upload-file photo" />
+         </div>
+         <div class="item" ng-if="user.profile.photo" ng-init='RC_photo=false'>
+            <a class="link" target='_blank' href="{{user.profile.photo}}"><img  /></a>
+            <span class="name">{{user.profile.photo.split('.').pop()}}</span>
+            <span class="trash" ng-click="RC_photo=true" />
+            <div class="delete-pane" ng-show="RC_photo">
+               <span class="trash" ng-click="user.profile.photo=''; RC_photo=false" />
+               <span class="name"><span class="fr">Supprimer</span><span class="en">Delete</span></span>
+               <span class="cancel" ng-click="RC_photo=false"></span>
+            </div>
+         </div>
+         <label class="topborder" for="photo">
+            <div ng-show="form4.uPhoto.$invalid" ng-messages="form4.uPhoto.$error" class="help-block error">
+               <div ng-message="required">
+                  <span class="fr">Obligatoire</span>
+                  <span class="en">Required</span>
+               </div>
+            </div>
+            <div ng-show="invalidPhoto.$errorMessages" ng-messages="invalidPhoto.$errorMessages"
+               class="help-block error">
+               <div ng-message="pattern">
+                  <span class="fr">Formats acceptés jpg / png / gif</span>
+                  <span class="en">Accepted formats : jpg / png / gif</span>
+               </div>
+               <div ng-message="maxSize">
+                  <span class="fr">Photo trop importante < 10MB</span>
+                  <span class="en">max size 10MB</span>
+               </div>
+            </div>
+            <span class="field-state"></span>
+            <span class="fr">Photo d'identité (format jpg / png / gif)</span>
+            <span class="en">Id Photo (image only : jpg / png / gif) </span>
+         </label>
+      </div>
+   </form>
+   <div class="navigation">
+      <a class="btn prev" ui-sref="candidature.spoken-languages"><span class="fr">Retour</span><span class="en">Back</span></a>
+      <a class="btn next" ui-sref="candidature.curiculum"><span class="fr">Continuer</span><span class="en">Continue</span></a>
+   </div>
+</div>

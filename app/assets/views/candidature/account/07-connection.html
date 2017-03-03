@@ -1,0 +1,51 @@
+<div class="login-page">
+   <h1>
+      <span class='fr'>Connexion</span>
+      <span class='en'>Login</span>
+   </h1>
+   <p>Pour commencer ou poursuivre le processus d'inscription, veuillez compléter les champs <br/>ci-dessous :</p>
+      <form name="form" ng-submit="login(form, vm)" novalidate>
+         <div class="field">
+            <input id="username" type="text" ng-model="vm.username" name="uUsername" required />
+            <div ng-show="form.uUserName.$touched && form.uUserName.$error" ng-messages="form.uUserName.$error" class="help-block error">
+               <div ng-message="required">
+                  <span class="fr">Requis</span>
+                  <span class="en">Required</span>
+               </div>
+            </div>
+            <label for="username">
+            <span class="field-state required" ng-class="{ 'error': form.uUsername.$error, 'valid':form.uUsername.$valid, 'touched': form.uUsername.$touched }"></span>
+            <span class="fr">Nom d'utilisateur</span>
+            <span class="en">User name</span>
+            </label>
+         </div>
+         <div class="field">
+            <input id="password" type="password" ng-model="vm.password" name="uPassword" required />
+            <div ng-show="form.uPassword.$touched && form.uPassword.$error.required" ng-messages="form.uPassword.$error" class="help-block error">
+               <div ng-message="required">
+                  <span class="fr">Mot de passe Requis</span>
+                  <span class="en">Required</span>
+               </div>
+            </div>
+            <label for="password">
+            <span class="field-state required" ng-class="{ 'error': form.uUsername.$error, 'valid':form.uUsername.$valid, 'touched': form.uUsername.$touched }"></span>
+            <span class="fr">Mot de passe</span>
+            <span class="en">Password</span>
+            </label>
+         </div>
+         <div ng-if="vm.error" class="alert alert-danger">{{vm.error}}</div>
+      </form>
+      <a ng-click="login(form, vm)" ng-class="{ 'has-error': form.$invalid }" class="btn grey">Login</a>
+      <div class="navigation footer">
+         <p>
+            <small>
+            <a ui-sref="candidature.account.password-forgot">Mot de passe oublié</a>
+            /
+            <a class="" ui-sref="candidature.account.create-user">
+            Créer un utilisateur
+            </a>
+            </small>
+         </p>
+      </div>
+
+</div>

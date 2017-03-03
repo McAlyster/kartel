@@ -1,0 +1,139 @@
+<div class="help-pane" ng-show='display_help' ng-init="show_help(false)">
+   <span class="close" ng-click="show_help(false)">x</span>
+   <h1><class class="fr">Aide</class><class class="en">Help</class></h1>
+   <div class="fr">
+      <p></p>
+   </div>
+   <div class="en">
+      <p></p>
+   </div>
+</div>
+
+<div class="cv">
+   <h1>
+      <span class="fr">CV / Justificatifs</span>
+      <span class="en">CV / Justification</span>
+   </h1>
+   <p>Envoyer nous votre Cv complet : </p>
+   <p>&nbsp;</p>
+   <div class="field">
+      <input name="cCV" ng-model="candidature.curriculum_vitae" hidden required />
+      <div id="cv"
+         class="media-upload"
+         ng-show="!candidature.curriculum_vitae"
+         ng-model="candidature.curriculum_vitae"
+         name="cJustification"
+         ngf-select="upload(candidature.curriculum_vitae, candidature, 'curriculum_vitae') " ngf-capture="'camera'"
+         accept="application/pdf"
+         ngf-accept="'application/pdf'"
+         ngf-pattern="'application/pdf'"
+         ngf-model-invalid="invalidCV"
+         required
+         >
+         <span class="upload-file" />
+      </div>
+      <div class="item" ng-if="candidature.curriculum_vitae" ng-init='RC_CV=false'>
+         <a class="link" target='_blank' href="{{candidature.curriculum_vitae}}"><img  /></a>
+         <span class="name">{{candidature.curriculum_vitae.split('.').pop()}}</span>
+         <span class="trash" ng-click="RC_CV=true" />
+         <div class="delete-pane" ng-show="RC_CV">
+            <span class="trash" ng-click="candidature.curriculum_vitae=''; RC_CV=false" />
+            <span class="name"><span class="fr">Supprimer</span><span class="en">Delete</span></span>
+            <span class="cancel" ng-click="RC_CV=false"></span>
+         </div>
+      </div>
+      <div ng-show="invalidCV.$errorMessages" ng-messages="invalidCV.$errorMessages" class="help-block error">
+         <div ng-message="pattern">
+            <span class="fr">Ce n'est pas un fichier pdf</span>
+            <span class="en">Only Pdf accepted</span>
+         </div>
+      </div>
+      <div ng-show="form.cCV.$touched && form.cJustification.$invalid" ng-messages="form.cCV.$error" class="help-block error">
+         <div ng-message="required">
+            <span class="fr">Obligatoire</span>
+            <span class="en">Required</span>
+         </div>
+         <div ng-message="justification_letter">
+            <span class="fr">Valeur éronnée</span>
+            <span class="en">Value Error</span>
+         </div>
+      </div>
+      <label class="topborder" for="cv">
+      <span class="field-state required"></span>
+      <span class="fr">CV complet</span>
+      <span class="en">Complet CV </span>
+      </label>
+   </div>
+   <hr/>
+   <p>Envoyer nous vos justificatifs de diplômes, certifications, ... (formats images ou pdfs)</p>
+   <div class="field">
+
+         <div ng-repeat="item in cursus_justifications.media | orderBy:'1*position' track by $index"
+               ng-model="cursus_justifications.media"
+               name="uCursus"
+               class="item-list">
+
+             <div class="item" ng-if="item.file || item.picture" ng-init='RC_CursusJustif[$index]=false'>
+               <a class="link" target='_blank' href="{{item.file || item.picture}}"><img  /></a>
+               <input class="name no-border" type="text" placeholder="" ng-model="item.label" ng-change="item.patch({label: item.label})" class="no-border" required />
+               <span class="trash" ng-click="RC_CursusJustif[$index]=true" />
+               <div class="delete-pane" ng-show="RC_CursusJustif[$index]">
+                   <span class="trash" ng-click="removeItem(cursus_justifications.media, $index); RC_CursusJustif[$index]=false" />
+                   <span class="name"><span class="fr">Supprimer</span><span class="en">Delete</span></span>
+                   <span class="cancel" ng-click="RC_CursusJustif[$index]=false"></span>
+               </div>
+             </div>
+             <div class="modal show" ng-if="!item.label">
+                <div class="modal-content">
+                  <p>Veuillez entrer le titre du justificatif : </p>
+                  <input class="name no-border inline" type="text" placeholder="" ng-model="label[$index]" ng-change="" class="no-border" required />
+
+                  <label class="topborder" for="cursus">
+                    <span class="field-state required"></span>
+                    <span class="fr">Titre</span>
+                    <span class="en">Tilte</span>
+                  </label>
+                  <div class="btn green" ng-show="label[$index]" ng-click='item.label = label[$index]; item.patch({label: item.label})'>Valider</div>
+                </div>
+             </div>
+
+
+           </div>
+
+           <div>
+             <div
+               ng-model="file"
+               class="media-upload"
+               ngf-select="uploadFile(file, cursus_justifications)"
+               ngf-capture="'camera'"
+               accept="image/*, application/pdf"
+               ngf-accept="'image/*, application/pdf'"
+               ngf-pattern="'image/*,application/pdf'"
+               ngf-model-invalid="invalidFileCursusJustification"
+               name="jCursus"
+               >
+               <span class="upload-file" />
+             </div>
+             <div ng-show="invalidFileCursusJustification.$errorMessages" ng-messages="invalidFileCursusJustification.$errorMessages" class="help-block error">
+               <div ng-message="pattern">
+                 <span class="fr">Formats acceptés : jpg / png / gif / pdf</span>
+                 <span class="en">Accepted formats : jpg / png / gif / pdf</span>
+               </div>
+             </div>
+             <label class="topborder" for="cursus">
+               <span class="fr">Ajouter un justificatif (diplôme, certification, ... )</span>
+               <span class="en">Add a document (degree, certificatie, ... )</span>
+             </label>
+           </div>
+
+           <p></p>
+
+
+     </div>
+
+
+   <div class="navigation">
+      <a class="btn prev" ui-sref="candidature.curiculum"><span class="fr">Retour</span><span class="en">Back</span></a>
+      <a class="btn next" ui-sref="candidature.artistic-background"><span class="fr">Continuer</span><span class="en">Continue</span></a>
+   </div>
+</div>

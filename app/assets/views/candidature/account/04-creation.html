@@ -1,0 +1,120 @@
+<div class="create-account-page">
+      <h1>
+         <span class="fr">Création de votre compte</span>
+         <span class="en">Creating Your Account</span>
+      </h1>
+      <div class="fr">
+         <p>Pour les besoins de l'inscription (envoi postal ou en ligne), vous devez créer un compte.</p>
+      </div>
+      <div class="en">
+         <p>For registration purposes (mail or online), you must create an account.</p>
+      </div>
+      <form name="form" class="css-form" ng-submit="form.$valid && login()" novalidate>
+         <div class="field">
+            <input id="name" type="text" ng-change="setUserName(form, user)" ng-model="user.last_name" name="uName" required />
+            <div ng-show="form.uName.$touched && form.uName.$invalid" ng-messages="form.uName.$error" class="help-block error">
+               <div ng-message="required">
+                  <span class="fr">Nom requis</span>
+                  <span class="en">required</span>
+               </div>
+            </div>
+            <label for="name">
+            <span class="field-state required" ng-class="{ 'error': form.uName.$error, 'valid':form.uName.$valid, 'touched': form.uName.$touched }"></span>
+            <span class="fr">Nom</span>
+            <span class="en">Name</span>
+            </label>
+         </div>
+         <div class="field">
+            <input id="firstname" type="text"  ng-change="setUserName(form, user)" ng-model="user.first_name" name="uFirstName" required />
+            <div ng-show="form.uFirstName.$touched  && form.uFirstName.$invalid" ng-messages="form.uFirstName.$error" class="help-block error">
+               <div ng-message="required">
+                  <span class="fr">Prénom requis</span>
+                  <span class="en">required</span>
+               </div>
+            </div>
+            <label for="firstname">
+            <span class="field-state required" ng-class="{ 'error': form.uFirstName.$error, 'valid':form.uFirstName.$valid, 'touched': form.uFirstName.$touched }"></span>
+            <span class="fr">Prénom</span>
+            <span class="en">First Name</span>
+            </label>
+         </div>
+         <div class="field">
+            <input type="text" id="username" ng-model="user.username" ng-minlength="4" name="uUserName" unique-user-field required />
+            <div ng-show="form.uUserName.$viewValue.length>0 && form.uUserName.$invalid" ng-messages="form.uUserName.$error" class="help-block error">
+               <div ng-message="minlength">
+                  <span class="fr">Minimum 4 signes</span>
+                  <span class="en">4 char min</span>
+               </div>
+               <div ng-message="required">
+                  <span class="fr">Nom requis</span>
+                  <span class="en">required</span>
+               </div>
+               <div ng-message="uniqueUserField">
+                  <span class="fr">Ce nom d'utilisateur est déjà utilisé, choisissez en un autre</span>
+                  <span class="en">Username already taken</span>
+               </div>
+            </div>
+            <label for="username">
+            <span class="field-state required" ng-class="{ 'error': form.uUserName.$error, 'valid':form.uUserName.$valid, 'touched': form.uUserName.$touched }"></span>
+            <span class="fr">Nom d'utilisateur</span>
+            <span class="en">User name</span>
+            </label>
+         </div>
+         <div class="field">
+            <input id="email" type="email" ng-model="user.email" name="uEmail" unique-user-field required />
+            <div ng-show="form.uEmail.$touched && form.uEmail.$invalid" ng-messages="form.uEmail.$error" class="help-block error">
+               <div ng-message="required">
+                  <span class="fr">Requis</span>
+                  <span class="en">required</span>
+               </div>
+               <div ng-message="email">
+                  <span class="fr">E-mail non valide</span>
+                  <span class="en">This is not a valid email</span>
+               </div>
+               <div ng-message="uniqueUserField">
+                  <span class="fr">Cet email est déjà associé à un utilisateur, <a ui-sref="candidature.account.login">connectez vous</a></span>
+                  <span class="en">Email is already use by an account, <a ui-sref="candidature.account.login">connect you</a></span>
+               </div>
+            </div>
+            <label for="email">
+            <span class="field-state required" ng-class="{ 'error': form.uEmail.$error, 'valid':form.uEmail.$valid, 'touched': form.uEmail.$touched }"></span>
+            <span class="fr">E-mail</span>
+            <span class="en">Email</span>
+            </label>
+         </div>
+         <div class="field">
+            <input id="email-confirm" type="email" ng-model="emailconfirm" name="uEmailComfim" same-value-as="user.email" required />
+            <div ng-show="form.uEmailComfim.$touched  && form.uEmailComfim.$invalid" ng-messages="form.uEmailComfim.$error" class="help-block error">
+               <div ng-message="required">
+                  <span class="fr">Prénom requis</span>
+                  <span class="en">required</span>
+               </div>
+               <div ng-message="email">
+                  <span class="fr">E-mail non valide</span>
+                  <span class="en">This is not a valid email</span>
+               </div>
+               <div ng-message="sameValueAs">
+                  <span class="fr">Les deux emails doivent être les mêmes</span>
+                  <span class="en">Emails not same</span>
+               </div>
+            </div>
+            <label for="email-confirm">
+            <span class="field-state required" ng-class="{ 'error': form.uEmail.$error, 'valid':form.uEmail.$valid, 'touched': form.uEmail.$touched }"></span>
+            <span class="fr">Confirmez votre E-mail</span>
+            <span class="en">Email confirm</span>
+            </label>
+         </div>
+         <div>
+            <div ng-show="form.$error  && form.$submit  && form.$invalid" ng-messages="form.$error" class="help-block error">
+               {{form.error}}
+            </div>
+         </div>
+      </form>
+      <div class="btn green" ng-class="{ 'has-error': form.$invalid }" ng-click="create(form, user)">
+         Créer un compte
+      </div>
+      <div class="navigation">
+         <span class="fr">J'ai déjà un compte</span><span class="en">I already have an account</span>
+         <div class="btn grey" ui-sref="candidature.account.login">Login</div>
+      </div>
+</div>
